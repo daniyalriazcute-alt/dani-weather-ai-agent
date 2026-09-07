@@ -8,7 +8,7 @@ st.set_page_config(
     layout="wide",
 )
 
-# Custom CSS
+# Custom CSS (minimal, just for styling)
 st.markdown("""
 <style>
     /* Hide default Streamlit elements */
@@ -21,123 +21,13 @@ st.markdown("""
         background: linear-gradient(135deg, #0a1922 0%, #1a2a3a 50%, #0d1b2a 100%);
     }
     
-    /* Left column styling */
-    .left-column {
+    /* Left column background */
+    .left-col {
         background: rgba(10, 25, 40, 0.95);
         border-right: 2px solid rgba(74, 158, 255, 0.2);
         padding: 2rem 1.5rem;
         min-height: 100vh;
         height: 100%;
-        border-radius: 0;
-    }
-    
-    .left-column h2 {
-        color: #4a9eff !important;
-        font-size: 1.3rem !important;
-        margin-top: 0 !important;
-        margin-bottom: 0.5rem !important;
-    }
-    
-    .left-column h3 {
-        color: #4a9eff !important;
-        font-size: 1.1rem !important;
-        margin-top: 1.2rem !important;
-        margin-bottom: 0.5rem !important;
-    }
-    
-    .left-column p {
-        color: #c8d6e5 !important;
-        font-size: 0.9rem !important;
-        line-height: 1.6 !important;
-    }
-    
-    .left-column li {
-        color: #c8d6e5 !important;
-        padding: 4px 0 !important;
-        list-style-type: none !important;
-    }
-    
-    /* Sidebar boxes */
-    .sidebar-box {
-        background: rgba(20, 50, 80, 0.3);
-        padding: 12px 15px;
-        border-radius: 10px;
-        margin: 8px 0;
-        border-left: 3px solid #4a9eff;
-    }
-    
-    .sidebar-box p {
-        color: #e8f0fe !important;
-        margin: 0;
-        font-size: 0.9rem !important;
-    }
-    
-    .about-me-box {
-        background: rgba(20, 50, 80, 0.3);
-        padding: 12px 15px;
-        border-radius: 10px;
-        border: 1px solid rgba(42, 90, 138, 0.3);
-        margin: 8px 0;
-    }
-    
-    .about-me-box p {
-        color: #c8d6e5 !important;
-        font-size: 0.85rem !important;
-        line-height: 1.6 !important;
-        margin: 0 0 6px 0 !important;
-    }
-    
-    .highlight {
-        color: #4a9eff !important;
-        font-weight: 600;
-    }
-    
-    .highlight-cyan {
-        color: #00d4ff !important;
-        font-weight: 500;
-    }
-    
-    .creator-badge {
-        background: rgba(20, 50, 80, 0.4);
-        border-radius: 10px;
-        padding: 12px;
-        margin-top: 12px;
-        border: 1px solid rgba(42, 90, 138, 0.3);
-        text-align: center;
-    }
-    
-    .creator-badge .name {
-        color: #4a9eff !important;
-        font-weight: 700;
-        font-size: 0.95rem !important;
-    }
-    
-    .creator-badge .title {
-        color: #00d4ff !important;
-        font-size: 0.75rem !important;
-    }
-    
-    .creator-badge .heart {
-        color: #ff6b6b !important;
-    }
-    
-    .copyright {
-        text-align: center;
-        margin-top: 15px;
-        padding-top: 10px;
-        border-top: 1px solid rgba(26, 58, 90, 0.3);
-    }
-    
-    .copyright p {
-        color: #4a6a7a !important;
-        font-size: 0.65rem !important;
-        margin: 2px 0 !important;
-    }
-    
-    .divider {
-        border: none;
-        border-top: 1px solid rgba(26, 58, 90, 0.3);
-        margin: 1.5rem 0;
     }
     
     /* Chat messages */
@@ -282,75 +172,55 @@ st.markdown("""
         0%, 100% { transform: scale(1); }
         50% { transform: scale(1.05); }
     }
-    
-    /* Right column - main content */
-    .main-content {
-        padding: 1rem 2rem 6rem 2rem;
-    }
 </style>
 """, unsafe_allow_html=True)
 
 # ============================================================
-# TWO COLUMN LAYOUT - LEFT = SIDEBAR, RIGHT = CHAT
+# TWO COLUMN LAYOUT
 # ============================================================
 col1, col2 = st.columns([3, 9])
 
 # ============================================================
-# LEFT COLUMN - All About Me Content (VISIBLE ALWAYS)
+# LEFT COLUMN - PURE STREAMLIT, NO HTML
 # ============================================================
 with col1:
-    st.markdown('<div class="left-column">', unsafe_allow_html=True)
+    st.markdown('<div class="left-col">', unsafe_allow_html=True)
     
+    # Using ONLY Streamlit native functions - NO HTML
     st.markdown("## 🌤️ About Dani")
-    st.markdown("""
-    <div class="sidebar-box">
-        <p>Dani converts natural-language weather requests into accurate forecasts using advanced AI and real-time weather data.</p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.write("Dani converts natural-language weather requests into accurate forecasts using advanced AI and real-time weather data.")
+    
+    st.markdown("---")
     
     st.markdown("### ✨ Key Features")
-    st.markdown("""
-    <ul>
-        <li>📍 Location-based forecasts</li>
-        <li>🌡️ Temperature & precipitation</li>
-        <li>📅 1-7 day predictions</li>
-        <li>🤖 Natural language understanding</li>
-        <li>🔒 Secure & reliable</li>
-    </ul>
-    """, unsafe_allow_html=True)
+    st.write("📍 Location-based forecasts")
+    st.write("🌡️ Temperature & precipitation")
+    st.write("📅 1-7 day predictions")
+    st.write("🤖 Natural language understanding")
+    st.write("🔒 Secure & reliable")
     
-    st.markdown("""
-    <div class="sidebar-box" style="border-left-color:#00d4ff;margin-top:12px;">
-        <p>💡 <strong>Try asking:</strong><br>
-        <span style="color:#b0c4de;">"What's the weather in Karachi?"</span><br>
-        <span style="color:#b0c4de;">"Will it rain in Lahore tomorrow?"</span></p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("---")
     
-    st.markdown('<hr class="divider">', unsafe_allow_html=True)
+    st.markdown("### 💡 Try asking:")
+    st.write('"What\'s the weather in Karachi?"')
+    st.write('"Will it rain in Lahore tomorrow?"')
+    
+    st.markdown("---")
     
     st.markdown("## 👨‍💻 About Me")
-    st.markdown("""
-    <div class="about-me-box">
-        <p>Hi, I'm <span class="highlight">Daniyal Riaz</span>, an <span class="highlight-cyan">AI Offensive Security Enthusiast</span>, <span class="highlight-cyan">Ethical Hacker</span>, and <span class="highlight-cyan">Bug Bounty Hunter</span>.</p>
-        <p>I'm passionate about finding vulnerabilities and helping organizations secure their digital assets.</p>
-        <p>🎯 <span class="highlight">My Vision:</span> Creating AI applications with security at the forefront.</p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.write("Hi, I'm **Daniyal Riaz**, an AI Offensive Security Enthusiast, Ethical Hacker, and Bug Bounty Hunter.")
+    st.write("I'm passionate about finding vulnerabilities and helping organizations secure their digital assets.")
+    st.write("**My Vision:** Creating AI applications with security at the forefront.")
     
-    st.markdown("""
-    <div class="creator-badge">
-        <p class="name">👨‍💻 Created with <span class="heart">❤️</span> by Daniyal Riaz</p>
-        <p class="title">AI Offensive Security Enthusiast • Ethical Hacker • Bug Bounty Hunter</p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("---")
     
-    st.markdown("""
-    <div class="copyright">
-        <p>© 2026 Dani Weather Agent</p>
-        <p>Built with security in mind 🔒</p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("### 👨‍💻 Created with ❤️ by Daniyal Riaz")
+    st.write("*AI Offensive Security Enthusiast • Ethical Hacker • Bug Bounty Hunter*")
+    
+    st.markdown("---")
+    
+    st.write("© 2026 Dani Weather Agent")
+    st.write("Built with security in mind 🔒")
     
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -358,8 +228,6 @@ with col1:
 # RIGHT COLUMN - Chat Area
 # ============================================================
 with col2:
-    st.markdown('<div class="main-content">', unsafe_allow_html=True)
-    
     # Logo and Header
     st.markdown("""
     <div class="logo-container">
@@ -422,5 +290,3 @@ with col2:
             st.session_state.messages.append({"role": "assistant", "content": result["answer"]})
         
         st.rerun()
-    
-    st.markdown('</div>', unsafe_allow_html=True)
