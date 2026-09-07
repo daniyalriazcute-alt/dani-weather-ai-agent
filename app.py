@@ -16,7 +16,7 @@ st.set_page_config(
 # ============================================================
 st.markdown("""
 <style>
-    /* Hide Streamlit default elements */
+    /* Hide Streamlit default header elements */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
@@ -32,8 +32,6 @@ st.markdown("""
         background: rgba(10, 25, 40, 0.98) !important;
         border-right: 1px solid rgba(74, 158, 255, 0.15) !important;
         padding: 2rem 1.5rem !important;
-        width: 320px !important;
-        min-width: 320px !important;
     }
     
     section[data-testid="stSidebar"] h1,
@@ -144,13 +142,7 @@ st.markdown("""
         margin: 0;
     }
     
-    /* Chat area */
-    .chat-container {
-        padding: 1rem 2rem 7rem 2rem;
-        max-width: 900px;
-        margin: 0 auto;
-    }
-    
+    /* Chat header */
     .chat-header {
         text-align: center;
         padding: 15px 0 20px 0;
@@ -169,55 +161,6 @@ st.markdown("""
         color: #7a9ab5;
         font-size: 0.9rem;
         margin: 0;
-    }
-    
-    /* Chat messages */
-    .stChatMessage {
-        padding: 0.4rem 0 !important;
-    }
-    
-    .stChatMessage [data-testid="stMarkdownContainer"] {
-        padding: 10px 16px;
-        border-radius: 18px;
-        color: #e8f0fe;
-        max-width: 80%;
-    }
-    
-    .stChatMessage:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stMarkdownContainer"] {
-        background: rgba(30, 70, 110, 0.7);
-        border: 1px solid rgba(74, 158, 255, 0.25);
-        border-radius: 18px 18px 4px 18px;
-        margin-left: auto;
-        margin-right: 0;
-    }
-    
-    .stChatMessage:has([data-testid="stChatMessageAvatarAssistant"]) [data-testid="stMarkdownContainer"] {
-        background: rgba(20, 50, 80, 0.45);
-        border: 1px solid rgba(0, 212, 255, 0.15);
-        border-radius: 18px 18px 18px 4px;
-        margin-left: 0;
-        margin-right: auto;
-    }
-    
-    /* Chat input */
-    .stChatInput {
-        background: rgba(10, 25, 40, 0.95) !important;
-        border: 2px solid rgba(74, 158, 255, 0.35) !important;
-        border-radius: 30px !important;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    }
-    .stChatInput textarea {
-        color: #ffffff !important;
-        background: transparent !important;
-    }
-    .stChatInput textarea::placeholder {
-        color: #8899aa !important;
-    }
-    .stChatInput button {
-        background: linear-gradient(135deg, #4a9eff, #00d4ff) !important;
-        border: none !important;
-        border-radius: 20px !important;
-        color: white !important;
     }
     
     /* Welcome box */
@@ -245,18 +188,6 @@ st.markdown("""
         margin-top: 8px;
         line-height: 1.8;
     }
-    
-    /* Mobile responsive */
-    @media (max-width: 768px) {
-        section[data-testid="stSidebar"] {
-            width: 280px !important;
-            min-width: 280px !important;
-            padding: 1rem !important;
-        }
-        .chat-container {
-            padding: 0.5rem 1rem 6rem 1rem;
-        }
-    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -264,7 +195,6 @@ st.markdown("""
 # SIDEBAR - All About Information
 # ============================================================
 with st.sidebar:
-    # Logo
     st.markdown("""
     <div class="sidebar-logo">
         <p class="logo-text">🤖 Dani</p>
@@ -272,7 +202,6 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
     
-    # About Dani
     st.markdown('<p class="sidebar-section-title">🌤️ About Dani</p>', unsafe_allow_html=True)
     st.markdown("""
     <div class="sidebar-info-box">
@@ -280,7 +209,6 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
     
-    # Key Features
     st.markdown('<p class="sidebar-section-title">✨ Key Features</p>', unsafe_allow_html=True)
     st.markdown('<p class="sidebar-feature">📍 Location-based forecasts</p>', unsafe_allow_html=True)
     st.markdown('<p class="sidebar-feature">🌡️ Temperature & precipitation</p>', unsafe_allow_html=True)
@@ -289,7 +217,6 @@ with st.sidebar:
     st.markdown('<p class="sidebar-feature">🔒 Secure & reliable</p>', unsafe_allow_html=True)
     st.markdown('<p class="sidebar-feature">⚡ Real-time weather data</p>', unsafe_allow_html=True)
     
-    # Try Asking
     st.markdown("""
     <div class="sidebar-info-box" style="border-left-color:#00d4ff; margin-top:10px;">
         <p>💡 <strong>Try asking:</strong><br>
@@ -300,7 +227,6 @@ with st.sidebar:
     
     st.markdown('<hr class="sidebar-divider">', unsafe_allow_html=True)
     
-    # About Me
     st.markdown('<p class="sidebar-section-title">👨‍💻 About Me</p>', unsafe_allow_html=True)
     st.markdown("""
     <div class="sidebar-about-box">
@@ -311,7 +237,6 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
     
-    # Creator
     st.markdown("""
     <div class="sidebar-creator">
         <p class="name">👨‍💻 Created with ❤️ by Daniyal Riaz</p>
@@ -319,16 +244,12 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
     
-    # Footer
     st.markdown('<p class="sidebar-footer">© 2026 Dani Weather Agent</p>', unsafe_allow_html=True)
     st.markdown('<p class="sidebar-footer">Built with security in mind 🔒</p>', unsafe_allow_html=True)
 
 # ============================================================
 # MAIN CHAT AREA
 # ============================================================
-st.markdown('<div class="chat-container">', unsafe_allow_html=True)
-
-# Chat Header
 st.markdown("""
 <div class="chat-header">
     <p class="chat-title">💬 Chat with Dani</p>
@@ -362,12 +283,10 @@ for msg in st.session_state.messages:
 user_query = st.chat_input("Ask Dani about the weather...")
 
 if user_query:
-    # Add user message
     st.session_state.messages.append({"role": "user", "content": user_query})
     with st.chat_message("user"):
         st.markdown(user_query)
     
-    # Get assistant response
     with st.chat_message("assistant"):
         with st.spinner("🌤️ Dani is checking the forecast..."):
             try:
@@ -381,7 +300,3 @@ if user_query:
                 st.error(f"Error: {e}")
         st.markdown(answer)
         st.session_state.messages.append({"role": "assistant", "content": answer})
-    
-    st.rerun()
-
-st.markdown('</div>', unsafe_allow_html=True)
