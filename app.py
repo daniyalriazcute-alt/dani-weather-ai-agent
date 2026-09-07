@@ -4,7 +4,7 @@ from workflow import run_workflow
 # Page configuration
 st.set_page_config(
     page_title="Dani — Weather AI Agent",
-    page_icon="🌤️",
+    page_icon="🤖",
     layout="wide",
 )
 
@@ -296,9 +296,15 @@ st.markdown("""
         gap: 15px;
         margin-bottom: 10px;
     }
-    .logo-container img {
+    .logo-container svg {
         width: 60px;
         height: 60px;
+        filter: drop-shadow(0 0 10px rgba(74, 158, 255, 0.3));
+        animation: pulse 3s ease-in-out infinite;
+    }
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -354,11 +360,29 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
-# Main chat area with Logo
+# Main chat area with Classic Robot Logo
 st.markdown("""
 <div class="chat-header">
     <div class="logo-container">
-        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%234a9eff' opacity='0.2'/><circle cx='50' cy='50' r='30' fill='%234a9eff' opacity='0.4'/><circle cx='50' cy='50' r='15' fill='%234a9eff'/><text x='50' y='55' text-anchor='middle' font-size='24' fill='white' font-family='Arial'>🌤️</text></svg>" width="60" height="60">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+            <!-- Background circle -->
+            <circle cx="50" cy="50" r="48" fill="#0a1922" stroke="#4a9eff" stroke-width="2"/>
+            <!-- Robot head -->
+            <rect x="25" y="20" width="50" height="45" rx="8" fill="#1a3a5a" stroke="#4a9eff" stroke-width="1.5"/>
+            <!-- Eyes -->
+            <circle cx="38" cy="38" r="5" fill="#00d4ff"/>
+            <circle cx="62" cy="38" r="5" fill="#00d4ff"/>
+            <circle cx="38" cy="38" r="2" fill="#ffffff"/>
+            <circle cx="62" cy="38" r="2" fill="#ffffff"/>
+            <!-- Mouth -->
+            <rect x="35" y="48" width="30" height="4" rx="2" fill="#4a9eff"/>
+            <!-- Antenna -->
+            <line x1="50" y1="20" x2="50" y2="10" stroke="#4a9eff" stroke-width="2"/>
+            <circle cx="50" cy="8" r="3" fill="#ff6b6b"/>
+            <!-- Ears -->
+            <rect x="20" y="30" width="5" height="15" rx="2" fill="#1a3a5a" stroke="#4a9eff" stroke-width="1"/>
+            <rect x="75" y="30" width="5" height="15" rx="2" fill="#1a3a5a" stroke="#4a9eff" stroke-width="1"/>
+        </svg>
         <div>
             <h1 style="font-size:2.5rem;background:linear-gradient(135deg,#4a9eff,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:0;font-weight:700;">Dani</h1>
             <p style="color:#7a9ab5;font-size:1rem;margin:5px 0 0 0;">Your Intelligent Weather AI Agent</p>
