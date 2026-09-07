@@ -8,7 +8,7 @@ st.set_page_config(
     layout="wide",
 )
 
-# Custom CSS for Navy Blue Theme
+# Custom CSS for Navy Blue Theme with Better Visibility
 st.markdown("""
 <style>
     /* Main background */
@@ -67,7 +67,7 @@ st.markdown("""
         color: #8899aa !important;
     }
     
-    /* Sidebar */
+    /* Sidebar - Enhanced visibility */
     .css-1d391kg, .css-1d391kg > div {
         background: rgba(10, 25, 40, 0.95) !important;
         border-right: 1px solid #1a3a5a !important;
@@ -77,12 +77,29 @@ st.markdown("""
         background: rgba(10, 25, 40, 0.95) !important;
     }
     
-    /* Sidebar text */
+    /* Sidebar text - Brighter for better visibility */
     .css-1d391kg p, .css-1d391kg li, .css-1d391kg label {
-        color: #b0c4de !important;
+        color: #e8f0fe !important;
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
     }
     
     .css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3 {
+        color: #4a9eff !important;
+    }
+    
+    /* Sidebar strong text */
+    .css-1d391kg strong {
+        color: #00d4ff !important;
+    }
+    
+    /* Sidebar list items */
+    .css-1d391kg ul {
+        padding-left: 20px !important;
+    }
+    
+    .css-1d391kg li {
+        padding: 5px 0 !important;
         color: #e8f0fe !important;
     }
     
@@ -169,30 +186,30 @@ st.markdown("""
     
     /* Creator badge */
     .creator-badge {
-        background: rgba(20, 50, 80, 0.4);
+        background: rgba(20, 50, 80, 0.6);
         border-radius: 10px;
-        padding: 12px 15px;
+        padding: 15px;
         margin-top: 15px;
-        border: 1px solid #1a3a5a;
+        border: 1px solid #2a5a8a;
         text-align: center;
     }
     .creator-badge p {
         margin: 5px 0;
-        color: #7a9ab5;
-        font-size: 0.85rem;
+        color: #c8d6e5 !important;
+        font-size: 0.9rem !important;
     }
     .creator-badge .name {
-        color: #4a9eff;
-        font-weight: 600;
-        font-size: 0.95rem;
+        color: #4a9eff !important;
+        font-weight: 700;
+        font-size: 1rem !important;
     }
     .creator-badge .heart {
-        color: #ff6b6b;
+        color: #ff6b6b !important;
     }
     .creator-badge .title {
-        color: #00d4ff;
-        font-size: 0.8rem;
-        font-weight: 400;
+        color: #00d4ff !important;
+        font-size: 0.85rem !important;
+        font-weight: 500;
     }
     
     /* Security badge */
@@ -200,14 +217,75 @@ st.markdown("""
         background: rgba(255, 50, 50, 0.1);
         border: 1px solid rgba(255, 50, 50, 0.3);
         border-radius: 8px;
-        padding: 8px 12px;
+        padding: 10px 12px;
         margin-top: 10px;
         text-align: center;
     }
     .security-badge p {
-        color: #ff6b6b;
-        font-size: 0.75rem;
+        color: #ff6b6b !important;
+        font-size: 0.8rem !important;
         margin: 0;
+    }
+    
+    /* Info boxes in sidebar */
+    .info-box {
+        background: rgba(20, 50, 80, 0.4);
+        padding: 15px;
+        border-radius: 10px;
+        border-left: 3px solid #4a9eff;
+        margin: 10px 0;
+    }
+    .info-box p {
+        color: #e8f0fe !important;
+        font-size: 0.9rem !important;
+        margin: 0;
+    }
+    .info-box span {
+        color: #b0c4de !important;
+    }
+    
+    /* About Me box */
+    .about-me-box {
+        background: rgba(20, 50, 80, 0.4);
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #2a5a8a;
+        margin: 10px 0;
+    }
+    .about-me-box p {
+        color: #e8f0fe !important;
+        line-height: 1.8 !important;
+        font-size: 0.92rem !important;
+        margin: 0 0 10px 0;
+    }
+    .about-me-box .highlight {
+        color: #4a9eff !important;
+        font-weight: 600;
+    }
+    .about-me-box .highlight-cyan {
+        color: #00d4ff !important;
+        font-weight: 500;
+    }
+    .about-me-box .vision {
+        color: #4a9eff !important;
+        font-weight: 600;
+    }
+    
+    /* Copyright */
+    .copyright {
+        text-align: center;
+        margin-top: 15px;
+        padding-top: 10px;
+        border-top: 1px solid #1a3a5a;
+    }
+    .copyright p {
+        color: #5a7a8a !important;
+        font-size: 0.7rem !important;
+        margin: 3px 0;
+    }
+    .copyright .tagline {
+        color: #4a6a7a !important;
+        font-size: 0.6rem !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -231,29 +309,31 @@ st.markdown(
 
 st.caption("⚡ Multi-stage workflow • RAG • Weather tool • Groq • OWASP Top 10 for LLM Applications 2025")
 
-# Sidebar - Updated with Professional About Me Section
+# Sidebar - Updated with Better Visibility
 with st.sidebar:
     st.markdown("""
     <div style="padding:10px 0;">
-        <h3 style="color:#4a9eff;margin-bottom:15px;">🌤️ About Dani</h3>
-        <p style="color:#b0c4de;line-height:1.6;">
-            Dani is your intelligent weather assistant that converts natural-language weather 
-            requests into accurate forecasts. Using advanced AI and real-time weather data, 
-            Dani provides you with reliable weather information for any location worldwide.
-        </p>
-        <br>
-        <h4 style="color:#4a9eff;">✨ Key Features</h4>
-        <ul style="color:#b0c4de;list-style-type:none;padding-left:0;">
-            <li style="padding:5px 0;">📍 <strong>Location-based forecasts</strong></li>
-            <li style="padding:5px 0;">🌡️ <strong>Temperature & precipitation data</strong></li>
-            <li style="padding:5px 0;">📅 <strong>1-7 day predictions</strong></li>
-            <li style="padding:5px 0;">🤖 <strong>Natural language understanding</strong></li>
-            <li style="padding:5px 0;">🔒 <strong>Secure & reliable</strong></li>
+        <h3 style="color:#4a9eff;margin-bottom:15px;font-size:1.3rem;">🌤️ About Dani</h3>
+        <div class="info-box">
+            <p style="color:#e8f0fe !important;line-height:1.7;">
+                Dani is your intelligent weather assistant that converts natural-language weather 
+                requests into accurate forecasts. Using advanced AI and real-time weather data, 
+                Dani provides you with reliable weather information for any location worldwide.
+            </p>
+        </div>
+        
+        <h4 style="color:#4a9eff;margin-top:20px;margin-bottom:10px;">✨ Key Features</h4>
+        <ul style="color:#e8f0fe !important;list-style-type:none;padding-left:0;">
+            <li style="padding:5px 0;color:#e8f0fe !important;">📍 <strong style="color:#00d4ff;">Location-based forecasts</strong></li>
+            <li style="padding:5px 0;color:#e8f0fe !important;">🌡️ <strong style="color:#00d4ff;">Temperature & precipitation data</strong></li>
+            <li style="padding:5px 0;color:#e8f0fe !important;">📅 <strong style="color:#00d4ff;">1-7 day predictions</strong></li>
+            <li style="padding:5px 0;color:#e8f0fe !important;">🤖 <strong style="color:#00d4ff;">Natural language understanding</strong></li>
+            <li style="padding:5px 0;color:#e8f0fe !important;">🔒 <strong style="color:#00d4ff;">Secure & reliable</strong></li>
         </ul>
-        <br>
-        <div style="background:rgba(20,50,80,0.3);padding:15px;border-radius:10px;border-left:3px solid #4a9eff;">
-            <p style="color:#7a9ab5;font-size:0.9rem;margin:0;">
-                💡 Try asking:<br>
+        
+        <div class="info-box" style="border-left-color:#00d4ff;">
+            <p style="color:#e8f0fe !important;font-size:0.9rem;margin:0;">
+                💡 <strong style="color:#4a9eff;">Try asking:</strong><br>
                 <span style="color:#b0c4de;">"What's the weather in Karachi today?"</span><br>
                 <span style="color:#b0c4de;">"Will it rain in Lahore tomorrow?"</span>
             </p>
@@ -261,24 +341,22 @@ with st.sidebar:
         
         <hr style="margin:20px 0;">
         
-        <!-- About Me Section - AI Offensive Security -->
+        <!-- About Me Section -->
         <h3 style="color:#4a9eff;margin-bottom:10px;">👨‍💻 About Me</h3>
-        <div style="background:rgba(20,50,80,0.3);padding:15px;border-radius:10px;border:1px solid #1a3a5a;">
-            <p style="color:#b0c4de;line-height:1.7;margin:0;">
-                Hi, I'm <span style="color:#4a9eff;font-weight:600;">Daniyal Riaz</span>, 
-                an <span style="color:#00d4ff;font-weight:500;">AI Offensive Security Enthusiast</span>, 
-                <span style="color:#00d4ff;font-weight:500;">Ethical Hacker</span>, and 
-                <span style="color:#00d4ff;font-weight:500;">Bug Bounty Hunter</span>.
+        <div class="about-me-box">
+            <p>
+                Hi, I'm <span class="highlight">Daniyal Riaz</span>, 
+                an <span class="highlight-cyan">AI Offensive Security Enthusiast</span>, 
+                <span class="highlight-cyan">Ethical Hacker</span>, and 
+                <span class="highlight-cyan">Bug Bounty Hunter</span>.
             </p>
-            <br>
-            <p style="color:#b0c4de;line-height:1.7;margin:0;">
+            <p>
                 I am passionate about finding vulnerabilities in digital assets and helping 
                 organizations secure their infrastructure. My mission is to make the digital 
                 world safer through responsible disclosure and proactive security measures.
             </p>
-            <br>
-            <p style="color:#b0c4de;line-height:1.7;margin:0;">
-                🎯 <strong style="color:#4a9eff;">My Vision:</strong><br>
+            <p>
+                🎯 <span class="vision">My Vision:</span><br>
                 Creating AI applications with security at the forefront. I believe that 
                 innovation and security should go hand in hand to build trustworthy and 
                 resilient digital solutions.
@@ -294,13 +372,13 @@ with st.sidebar:
         <div class="creator-badge">
             <p class="name">👨‍💻 Created with <span class="heart">❤️</span> by Daniyal Riaz</p>
             <p class="title">AI Offensive Security Enthusiast • Ethical Hacker • Bug Bounty Hunter</p>
-            <p style="font-size:0.7rem;color:#5a7a8a;margin-top:5px;">Building Secure AI Solutions</p>
+            <p style="color:#7a9ab5 !important;font-size:0.75rem !important;margin-top:5px;">Building Secure AI Solutions</p>
         </div>
         
         <!-- Copyright Footer -->
-        <div style="margin-top:15px;text-align:center;">
-            <p style="color:#5a7a8a;font-size:0.7rem;">© 2026 Dani Weather Agent • All rights reserved</p>
-            <p style="color:#4a5a6a;font-size:0.6rem;margin-top:3px;">Built with security in mind 🔒</p>
+        <div class="copyright">
+            <p>© 2026 Dani Weather Agent • All rights reserved</p>
+            <p class="tagline">Built with security in mind 🔒</p>
         </div>
     </div>
     """, unsafe_allow_html=True)
