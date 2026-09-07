@@ -1,5 +1,6 @@
 import streamlit as st
-from agent.workflow import run_workflow
+from workflow import run_workflow
+
 
 st.set_page_config(
     page_title="Dani — Secure Weather AI Agent",
