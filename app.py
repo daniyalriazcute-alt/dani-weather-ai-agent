@@ -243,30 +243,27 @@ st.markdown("""
         font-size: 0.85rem;
         margin-top: 8px;
     }
+
+    /* Chat Input Styling */
+    .stChatInputContainer {
+        padding-bottom: 1rem;
+    }
 </style>
 """, unsafe_allow_html=True)
 
 # SVG Robot Icon Definition
 ROBOT_SVG = """
 <svg class="robot-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Antenna -->
     <circle cx="32" cy="8" r="3" fill="#00D4FF"/>
     <line x1="32" y1="11" x2="32" y2="18" stroke="#4A9EFF" stroke-width="2.5"/>
-    <!-- Ears -->
     <rect x="10" y="27" width="4" height="10" rx="2" fill="#4A9EFF"/>
     <rect x="50" y="27" width="4" height="10" rx="2" fill="#4A9EFF"/>
-    <!-- Head Body -->
     <rect x="14" y="18" width="36" height="28" rx="8" fill="#12263E" stroke="#00D4FF" stroke-width="2"/>
-    <!-- Visor Panel -->
     <rect x="18" y="23" width="28" height="14" rx="5" fill="#0A131E" stroke="#4A9EFF" stroke-width="1.5"/>
-    <!-- Glowing Eyes -->
     <circle cx="26" cy="30" r="3" fill="#00D4FF"/>
     <circle cx="38" cy="30" r="3" fill="#00D4FF"/>
-    <!-- Mouth Grid -->
     <line x1="24" y1="40" x2="40" y2="40" stroke="#4A9EFF" stroke-width="2" stroke-linecap="round"/>
-    <!-- Neck -->
     <rect x="27" y="46" width="10" height="4" fill="#4A9EFF"/>
-    <!-- Body Base Header -->
     <path d="M20 50 C20 50, 24 58, 32 58 C40 58, 44 50, 44 50" stroke="#00D4FF" stroke-width="2" fill="none"/>
 </svg>
 """
@@ -275,15 +272,7 @@ ROBOT_SVG = """
 # SIDEBAR CONTENT
 # ============================================================
 with st.sidebar:
-    st.markdown(f"""
-    <div class="sidebar-logo">
-        <div class="robot-icon-container">
-            {ROBOT_SVG}
-        </div>
-        <p class="logo-text">DANI AI</p>
-        <p class="logo-sub">Weather Intelligence</p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-logo"><div class="robot-icon-container">' + ROBOT_SVG + '</div><p class="logo-text">DANI AI</p><p class="logo-sub">Weather Intelligence</p></div>', unsafe_allow_html=True)
     
     st.markdown('<p class="sidebar-section-title">⚡ Agent Overview</p>', unsafe_allow_html=True)
     st.markdown("""
@@ -312,16 +301,7 @@ with st.sidebar:
 # ============================================================
 # CHAT INTERFACE
 # ============================================================
-st.markdown(f"""
-<div class="chat-header">
-    <div class="robot-icon-container">
-        {ROBOT_SVG}
-    </div>
-    <div class="badge">● AI Agent Active</div>
-    <div class="chat-title">Weather Intelligence Console</div>
-    <div class="chat-subtitle">Ask anything about atmospheric conditions globally</div>
-</div>
-""", unsafe_allow_html=True)
+st.markdown('<div class="chat-header"><div class="robot-icon-container">' + ROBOT_SVG + '</div><div class="badge">● AI Agent Active</div><div class="chat-title">Weather Intelligence Console</div><div class="chat-subtitle">Ask anything about atmospheric conditions globally</div></div>', unsafe_allow_html=True)
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
