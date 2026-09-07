@@ -21,29 +21,32 @@ st.markdown("""
         background: linear-gradient(135deg, #0a1922 0%, #1a2a3a 50%, #0d1b2a 100%);
     }
     
-    /* Main container */
-    .main > div {
-        padding-top: 0rem;
-        padding-bottom: 0rem;
-        max-width: 100%;
-    }
-    
-    /* Left sidebar column */
+    /* Left sidebar column - FIXED POSITION */
     .left-sidebar {
         background: rgba(10, 25, 40, 0.95);
         border-right: 1px solid rgba(26, 58, 90, 0.5);
         padding: 2rem 1.5rem;
         height: 100vh;
         overflow-y: auto;
-        min-height: 100vh;
-        position: sticky;
+        position: fixed;
         top: 0;
+        left: 0;
+        width: 280px;
+        z-index: 100;
     }
     .left-sidebar h2, .left-sidebar h3 {
         color: #4a9eff !important;
     }
     .left-sidebar p, .left-sidebar li {
         color: #c8d6e5 !important;
+    }
+    
+    /* Main content - shifted right */
+    .main-content {
+        margin-left: 280px;
+        padding: 1rem 2rem;
+        height: 100vh;
+        overflow-y: auto;
     }
     
     /* Sidebar boxes */
@@ -58,14 +61,6 @@ st.markdown("""
         color: #e8f0fe !important;
         margin: 0;
         font-size: 0.9rem !important;
-    }
-    
-    .sidebar-title {
-        color: #4a9eff !important;
-        font-weight: 600;
-        margin-top: 15px;
-        margin-bottom: 8px;
-        font-size: 1.1rem !important;
     }
     
     .about-me-sidebar {
@@ -266,135 +261,130 @@ st.markdown("""
         50% { transform: scale(1.05); }
     }
     
-    /* Chat container */
-    .chat-container {
-        padding: 0 1rem;
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #0a1922;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #2a5a8a;
+        border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #3a7aba;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Create two columns: left sidebar (3) and main chat (9)
-col1, col2 = st.columns([3, 9])
-
-# LEFT COLUMN - Sidebar content (STAYS VISIBLE)
-with col1:
-    st.markdown("""
-    <div class="left-sidebar">
-    """, unsafe_allow_html=True)
-    
-    st.markdown("## 🌤️ About Dani")
-    st.markdown("""
+# FIXED SIDEBAR - Using HTML/CSS instead of Streamlit columns
+st.markdown("""
+<div class="left-sidebar">
+    <h2>🌤️ About Dani</h2>
     <div class="sidebar-box">
         <p>Dani converts natural-language weather requests into accurate forecasts using advanced AI and real-time weather data.</p>
     </div>
-    """, unsafe_allow_html=True)
     
-    st.markdown("### ✨ Key Features")
-    st.markdown("""
-    - 📍 Location-based forecasts
-    - 🌡️ Temperature & precipitation
-    - 📅 1-7 day predictions
-    - 🤖 Natural language understanding
-    - 🔒 Secure & reliable
-    """)
+    <h3>✨ Key Features</h3>
+    <ul style="color:#c8d6e5;list-style-type:none;padding-left:0;">
+        <li style="padding:5px 0;">📍 Location-based forecasts</li>
+        <li style="padding:5px 0;">🌡️ Temperature & precipitation</li>
+        <li style="padding:5px 0;">📅 1-7 day predictions</li>
+        <li style="padding:5px 0;">🤖 Natural language understanding</li>
+        <li style="padding:5px 0;">🔒 Secure & reliable</li>
+    </ul>
     
-    st.markdown("""
     <div class="sidebar-box" style="border-left-color:#00d4ff;">
         <p>💡 <strong>Try asking:</strong><br>
         <span style="color:#b0c4de;">"What's the weather in Karachi?"</span><br>
         <span style="color:#b0c4de;">"Will it rain in Lahore tomorrow?"</span></p>
     </div>
-    """, unsafe_allow_html=True)
     
-    st.divider()
+    <hr style="border-color:rgba(26,58,90,0.3);margin:20px 0;">
     
-    st.markdown("## 👨‍💻 About Me")
-    st.markdown("""
+    <h2>👨‍💻 About Me</h2>
     <div class="about-me-sidebar">
         <p>Hi, I'm <span class="highlight">Daniyal Riaz</span>, an <span class="highlight-cyan">AI Offensive Security Enthusiast</span>, <span class="highlight-cyan">Ethical Hacker</span>, and <span class="highlight-cyan">Bug Bounty Hunter</span>.</p>
         <p>I'm passionate about finding vulnerabilities and helping organizations secure their digital assets.</p>
         <p>🎯 <span class="highlight">My Vision:</span> Creating AI applications with security at the forefront.</p>
     </div>
-    """, unsafe_allow_html=True)
     
-    st.markdown("""
     <div class="creator-badge">
         <p class="name">👨‍💻 Created with <span class="heart">❤️</span> by Daniyal Riaz</p>
         <p class="title">AI Offensive Security Enthusiast • Ethical Hacker • Bug Bounty Hunter</p>
     </div>
-    """, unsafe_allow_html=True)
     
-    st.markdown("""
     <div class="copyright">
         <p>© 2026 Dani Weather Agent</p>
         <p>Built with security in mind 🔒</p>
     </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown('</div>', unsafe_allow_html=True)
+</div>
 
-# RIGHT COLUMN - Chat area
-with col2:
-    # Logo and Header
+<div class="main-content">
+""", unsafe_allow_html=True)
+
+# Logo and Header
+st.markdown("""
+<div class="logo-container">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="48" fill="#0a1922" stroke="#4a9eff" stroke-width="2"/>
+        <rect x="25" y="20" width="50" height="45" rx="8" fill="#1a3a5a" stroke="#4a9eff" stroke-width="1.5"/>
+        <circle cx="38" cy="38" r="5" fill="#00d4ff"/>
+        <circle cx="62" cy="38" r="5" fill="#00d4ff"/>
+        <circle cx="38" cy="38" r="2" fill="#ffffff"/>
+        <circle cx="62" cy="38" r="2" fill="#ffffff"/>
+        <rect x="35" y="48" width="30" height="4" rx="2" fill="#4a9eff"/>
+        <line x1="50" y1="20" x2="50" y2="10" stroke="#4a9eff" stroke-width="2"/>
+        <circle cx="50" cy="8" r="3" fill="#ff6b6b"/>
+        <rect x="20" y="30" width="5" height="15" rx="2" fill="#1a3a5a" stroke="#4a9eff" stroke-width="1"/>
+        <rect x="75" y="30" width="5" height="15" rx="2" fill="#1a3a5a" stroke="#4a9eff" stroke-width="1"/>
+    </svg>
+    <div>
+        <p class="title">Dani</p>
+        <p class="subtitle">Your Intelligent Weather AI Agent</p>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+# Display welcome message if no messages
+if not st.session_state.messages:
     st.markdown("""
-    <div class="logo-container">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="48" fill="#0a1922" stroke="#4a9eff" stroke-width="2"/>
-            <rect x="25" y="20" width="50" height="45" rx="8" fill="#1a3a5a" stroke="#4a9eff" stroke-width="1.5"/>
-            <circle cx="38" cy="38" r="5" fill="#00d4ff"/>
-            <circle cx="62" cy="38" r="5" fill="#00d4ff"/>
-            <circle cx="38" cy="38" r="2" fill="#ffffff"/>
-            <circle cx="62" cy="38" r="2" fill="#ffffff"/>
-            <rect x="35" y="48" width="30" height="4" rx="2" fill="#4a9eff"/>
-            <line x1="50" y1="20" x2="50" y2="10" stroke="#4a9eff" stroke-width="2"/>
-            <circle cx="50" cy="8" r="3" fill="#ff6b6b"/>
-            <rect x="20" y="30" width="5" height="15" rx="2" fill="#1a3a5a" stroke="#4a9eff" stroke-width="1"/>
-            <rect x="75" y="30" width="5" height="15" rx="2" fill="#1a3a5a" stroke="#4a9eff" stroke-width="1"/>
-        </svg>
-        <div>
-            <p class="title">Dani</p>
-            <p class="subtitle">Your Intelligent Weather AI Agent</p>
+    <div class="welcome-box">
+        <h2>👋 Hello! I'm Dani</h2>
+        <p>Ask me about the weather anywhere in the world.</p>
+        <div class="examples">
+            💡 Try: "What's the weather in Karachi today?"<br>
+            💡 Try: "Will it rain in Lahore tomorrow?"
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-    # Initialize chat history
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
+# Display chat messages
+for msg in st.session_state.messages:
+    with st.chat_message(msg["role"]):
+        st.markdown(msg["content"])
 
-    # Display welcome message if no messages
-    if not st.session_state.messages:
-        st.markdown("""
-        <div class="welcome-box">
-            <h2>👋 Hello! I'm Dani</h2>
-            <p>Ask me about the weather anywhere in the world.</p>
-            <div class="examples">
-                💡 Try: "What's the weather in Karachi today?"<br>
-                💡 Try: "Will it rain in Lahore tomorrow?"
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+# Chat input
+user_query = st.chat_input("Ask Dani about the weather...", key="chat_input")
 
-    # Display chat messages
-    chat_container = st.container()
-    with chat_container:
-        for msg in st.session_state.messages:
-            with st.chat_message(msg["role"]):
-                st.markdown(msg["content"])
+if user_query:
+    # Add user message
+    st.session_state.messages.append({"role": "user", "content": user_query})
+    
+    # Get assistant response
+    with st.spinner("🌤️ Dani is checking the forecast..."):
+        result = run_workflow(user_query)
+    
+    # Add assistant message
+    st.session_state.messages.append({"role": "assistant", "content": result["answer"]})
+    
+    # Rerun to update
+    st.rerun()
 
-    # Chat input
-    user_query = st.chat_input("Ask Dani about the weather...", key="chat_input")
-
-    if user_query:
-        # Add user message
-        st.session_state.messages.append({"role": "user", "content": user_query})
-        
-        # Get assistant response
-        with st.spinner("🌤️ Dani is checking the forecast..."):
-            result = run_workflow(user_query)
-        
-        # Add assistant message
-        st.session_state.messages.append({"role": "assistant", "content": result["answer"]})
-        
-        # Rerun to update the chat
-        st.rerun()
+# Close the main content div
+st.markdown('</div>', unsafe_allow_html=True)
