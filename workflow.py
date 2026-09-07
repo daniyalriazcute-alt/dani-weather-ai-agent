@@ -2,16 +2,16 @@ import json
 import os
 from groq import Groq
 
-from prompts.system_prompt import SYSTEM_PROMPT
-from prompts.extraction_prompt import EXTRACTION_PROMPT
-from rag.retriever import retrieve
-from security.validators import (
+from system_prompt import SYSTEM_PROMPT
+from extraction_prompt import EXTRACTION_PROMPT
+from retriever import retrieve
+from validators import (
     input_guard,
     parse_json_object,
     validate_intent,
     sanitize_answer,
 )
-from tools.weather import get_weather
+from weather import get_weather
 
 MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
 
