@@ -285,7 +285,7 @@ st.markdown(
 
 
 # ============================================================
-# HEADER WITH FIXED SVG LOGO
+# HEADER WITH ROBOT LOGO
 # ============================================================
 st.markdown(
     """
@@ -314,7 +314,7 @@ st.markdown(
 
 
 # ============================================================
-# ABOUT DANI
+# ABOUT DANI - LEFT SIDE
 # ============================================================
 st.markdown("## 🌤️ About Dani")
 
@@ -365,7 +365,7 @@ st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
 
 # ============================================================
-# ABOUT CREATOR
+# ABOUT ME - LEFT SIDE (COMPLETE)
 # ============================================================
 st.markdown("## 👨‍💻 About Me")
 
