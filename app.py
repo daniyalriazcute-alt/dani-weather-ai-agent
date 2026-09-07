@@ -6,6 +6,7 @@ st.set_page_config(
     page_title="Dani — Weather AI Agent",
     page_icon="🤖",
     layout="wide",
+    initial_sidebar_state="expanded"  # Force sidebar to be expanded
 )
 
 # Custom CSS for AI Chatbot Style
@@ -26,6 +27,24 @@ st.markdown("""
         padding-top: 0rem;
         padding-bottom: 0rem;
         max-width: 100%;
+    }
+    
+    /* Sidebar - Make sure it's visible */
+    .css-1d391kg, .css-1d391kg > div {
+        background: rgba(10, 25, 40, 0.95) !important;
+        border-right: 1px solid rgba(26, 58, 90, 0.5) !important;
+        padding-top: 1rem !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        min-width: 280px !important;
+        width: 300px !important;
+    }
+    
+    .css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3 {
+        color: #4a9eff !important;
+    }
+    .css-1d391kg p, .css-1d391kg li {
+        color: #c8d6e5 !important;
     }
     
     /* Chat container */
@@ -169,20 +188,6 @@ st.markdown("""
         background: #3a7aba;
     }
     
-    /* Sidebar styling */
-    .css-1d391kg, .css-1d391kg > div {
-        background: rgba(10, 25, 40, 0.95) !important;
-        border-right: 1px solid rgba(26, 58, 90, 0.5) !important;
-        padding-top: 2rem !important;
-    }
-    
-    .css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3 {
-        color: #4a9eff !important;
-    }
-    .css-1d391kg p, .css-1d391kg li {
-        color: #c8d6e5 !important;
-    }
-    
     /* Welcome message */
     .welcome-box {
         text-align: center;
@@ -309,7 +314,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Sidebar
+# Sidebar - Now properly visible
 with st.sidebar:
     st.markdown("### 🌤️ About Dani")
     st.markdown("""
