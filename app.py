@@ -6,7 +6,6 @@ st.set_page_config(
     page_title="Dani — Weather AI Agent",
     page_icon="🤖",
     layout="wide",
-    initial_sidebar_state="expanded"  # Force sidebar to be expanded
 )
 
 # Custom CSS for AI Chatbot Style
@@ -22,57 +21,105 @@ st.markdown("""
         background: linear-gradient(135deg, #0a1922 0%, #1a2a3a 50%, #0d1b2a 100%);
     }
     
-    /* Main container - full height */
-    .main > div {
-        padding-top: 0rem;
-        padding-bottom: 0rem;
-        max-width: 100%;
-    }
-    
-    /* Sidebar - Make sure it's visible */
-    .css-1d391kg, .css-1d391kg > div {
-        background: rgba(10, 25, 40, 0.95) !important;
+    /* Make sidebar visible and styled */
+    section[data-testid="stSidebar"] {
+        background: rgba(10, 25, 40, 0.98) !important;
         border-right: 1px solid rgba(26, 58, 90, 0.5) !important;
-        padding-top: 1rem !important;
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-        min-width: 280px !important;
+        min-width: 300px !important;
         width: 300px !important;
     }
     
-    .css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3 {
+    section[data-testid="stSidebar"] .css-1d391kg {
+        padding: 2rem 1rem !important;
+    }
+    
+    /* Sidebar text colors */
+    section[data-testid="stSidebar"] h1,
+    section[data-testid="stSidebar"] h2,
+    section[data-testid="stSidebar"] h3 {
         color: #4a9eff !important;
     }
-    .css-1d391kg p, .css-1d391kg li {
+    
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] li {
         color: #c8d6e5 !important;
     }
     
-    /* Chat container */
-    .chat-container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 1rem 2rem;
+    /* Sidebar boxes */
+    .sidebar-box {
+        background: rgba(20, 50, 80, 0.4) !important;
+        padding: 12px 15px !important;
+        border-radius: 10px !important;
+        margin: 8px 0 !important;
+        border-left: 3px solid #4a9eff !important;
+    }
+    .sidebar-box p {
+        color: #e8f0fe !important;
+        margin: 0 !important;
+        font-size: 0.9rem !important;
     }
     
-    /* Header */
-    .chat-header {
-        text-align: center;
-        padding: 1.5rem 0 1rem 0;
-        border-bottom: 1px solid rgba(74, 158, 255, 0.2);
-        margin-bottom: 1rem;
+    .sidebar-title {
+        color: #4a9eff !important;
+        font-weight: 600 !important;
+        margin-top: 15px !important;
+        margin-bottom: 8px !important;
+        font-size: 1.1rem !important;
     }
-    .chat-header h1 {
-        font-size: 2.5rem;
-        background: linear-gradient(135deg, #4a9eff, #00d4ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin: 0;
-        font-weight: 700;
+    
+    .about-me-sidebar {
+        background: rgba(20, 50, 80, 0.4) !important;
+        padding: 12px 15px !important;
+        border-radius: 10px !important;
+        border: 1px solid rgba(42, 90, 138, 0.3) !important;
+        margin: 8px 0 !important;
     }
-    .chat-header p {
-        color: #7a9ab5;
-        font-size: 1rem;
-        margin: 5px 0 0 0;
+    .about-me-sidebar p {
+        color: #c8d6e5 !important;
+        font-size: 0.85rem !important;
+        line-height: 1.6 !important;
+        margin: 0 0 6px 0 !important;
+    }
+    .about-me-sidebar .highlight {
+        color: #4a9eff !important;
+        font-weight: 600 !important;
+    }
+    .about-me-sidebar .highlight-cyan {
+        color: #00d4ff !important;
+        font-weight: 500 !important;
+    }
+    
+    .creator-badge {
+        background: rgba(20, 50, 80, 0.5) !important;
+        border-radius: 10px !important;
+        padding: 12px !important;
+        margin-top: 12px !important;
+        border: 1px solid rgba(42, 90, 138, 0.3) !important;
+        text-align: center !important;
+    }
+    .creator-badge .name {
+        color: #4a9eff !important;
+        font-weight: 700 !important;
+        font-size: 0.95rem !important;
+    }
+    .creator-badge .title {
+        color: #00d4ff !important;
+        font-size: 0.75rem !important;
+    }
+    .creator-badge .heart {
+        color: #ff6b6b !important;
+    }
+    
+    .copyright {
+        text-align: center !important;
+        margin-top: 15px !important;
+        padding-top: 10px !important;
+        border-top: 1px solid rgba(26, 58, 90, 0.3) !important;
+    }
+    .copyright p {
+        color: #4a6a7a !important;
+        font-size: 0.65rem !important;
+        margin: 2px 0 !important;
     }
     
     /* Chat messages */
@@ -110,14 +157,14 @@ st.markdown("""
         color: #e8f0fe;
     }
     
-    /* Chat input - FIXED with white text */
+    /* Chat input */
     .stChatInput {
         position: fixed;
         bottom: 2rem;
         left: 50%;
         transform: translateX(-50%);
-        width: 70%;
-        max-width: 800px;
+        width: 60%;
+        max-width: 700px;
         z-index: 999;
         padding: 0.5rem 1rem;
         background: rgba(10, 25, 40, 0.95);
@@ -131,7 +178,6 @@ st.markdown("""
         border: none !important;
         padding: 0 !important;
     }
-    /* FIX: White text for input */
     .stChatInput input {
         color: #ffffff !important;
         font-size: 1rem !important;
@@ -141,13 +187,11 @@ st.markdown("""
         outline: none !important;
         caret-color: #4a9eff !important;
     }
-    /* FIX: White placeholder */
     .stChatInput input::placeholder {
         color: #aabbcc !important;
         font-size: 0.95rem !important;
         opacity: 1 !important;
     }
-    /* FIX: Input text when typing */
     .stChatInput input:focus {
         color: #ffffff !important;
         background: transparent !important;
@@ -166,26 +210,6 @@ st.markdown("""
     .stChatInput button:hover {
         transform: scale(1.05) !important;
         box-shadow: 0 4px 20px rgba(74, 158, 255, 0.4) !important;
-    }
-    
-    /* Scrollable chat area */
-    .chat-messages {
-        height: calc(100vh - 200px);
-        overflow-y: auto;
-        padding-bottom: 100px;
-    }
-    .chat-messages::-webkit-scrollbar {
-        width: 6px;
-    }
-    .chat-messages::-webkit-scrollbar-track {
-        background: transparent;
-    }
-    .chat-messages::-webkit-scrollbar-thumb {
-        background: #2a5a8a;
-        border-radius: 10px;
-    }
-    .chat-messages::-webkit-scrollbar-thumb:hover {
-        background: #3a7aba;
     }
     
     /* Welcome message */
@@ -214,85 +238,6 @@ st.markdown("""
         margin-top: 1rem;
     }
     
-    /* Sidebar boxes */
-    .sidebar-box {
-        background: rgba(20, 50, 80, 0.3);
-        padding: 12px 15px;
-        border-radius: 10px;
-        margin: 8px 0;
-        border-left: 3px solid #4a9eff;
-    }
-    .sidebar-box p {
-        color: #e8f0fe !important;
-        margin: 0;
-        font-size: 0.9rem !important;
-    }
-    
-    .sidebar-title {
-        color: #4a9eff !important;
-        font-weight: 600;
-        margin-top: 15px;
-        margin-bottom: 8px;
-    }
-    
-    /* About me box */
-    .about-me-sidebar {
-        background: rgba(20, 50, 80, 0.3);
-        padding: 12px 15px;
-        border-radius: 10px;
-        border: 1px solid rgba(42, 90, 138, 0.3);
-        margin: 8px 0;
-    }
-    .about-me-sidebar p {
-        color: #c8d6e5 !important;
-        font-size: 0.85rem !important;
-        line-height: 1.6 !important;
-        margin: 0 0 6px 0;
-    }
-    .about-me-sidebar .highlight {
-        color: #4a9eff !important;
-        font-weight: 600;
-    }
-    .about-me-sidebar .highlight-cyan {
-        color: #00d4ff !important;
-        font-weight: 500;
-    }
-    
-    /* Creator badge */
-    .creator-badge {
-        background: rgba(20, 50, 80, 0.4);
-        border-radius: 10px;
-        padding: 12px;
-        margin-top: 12px;
-        border: 1px solid rgba(42, 90, 138, 0.3);
-        text-align: center;
-    }
-    .creator-badge .name {
-        color: #4a9eff !important;
-        font-weight: 700;
-        font-size: 0.95rem !important;
-    }
-    .creator-badge .title {
-        color: #00d4ff !important;
-        font-size: 0.75rem !important;
-    }
-    .creator-badge .heart {
-        color: #ff6b6b !important;
-    }
-    
-    /* Copyright */
-    .copyright {
-        text-align: center;
-        margin-top: 15px;
-        padding-top: 10px;
-        border-top: 1px solid rgba(26, 58, 90, 0.3);
-    }
-    .copyright p {
-        color: #4a6a7a !important;
-        font-size: 0.65rem !important;
-        margin: 2px 0;
-    }
-    
     /* Logo container */
     .logo-container {
         display: flex;
@@ -311,19 +256,40 @@ st.markdown("""
         0%, 100% { transform: scale(1); }
         50% { transform: scale(1.05); }
     }
+    
+    /* Chat header */
+    .chat-header {
+        text-align: center;
+        padding: 1.5rem 0 1rem 0;
+        border-bottom: 1px solid rgba(74, 158, 255, 0.2);
+        margin-bottom: 1rem;
+    }
+    .chat-header h1 {
+        font-size: 2.5rem;
+        background: linear-gradient(135deg, #4a9eff, #00d4ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0;
+        font-weight: 700;
+    }
+    .chat-header p {
+        color: #7a9ab5;
+        font-size: 1rem;
+        margin: 5px 0 0 0;
+    }
 </style>
 """, unsafe_allow_html=True)
 
-# Sidebar - Now properly visible
+# Sidebar - Using st.markdown with proper formatting
 with st.sidebar:
-    st.markdown("### 🌤️ About Dani")
+    st.markdown("## 🌤️ About Dani")
     st.markdown("""
     <div class="sidebar-box">
         <p>Dani converts natural-language weather requests into accurate forecasts using advanced AI and real-time weather data.</p>
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown('<p class="sidebar-title">✨ Key Features</p>', unsafe_allow_html=True)
+    st.markdown("### ✨ Key Features")
     st.markdown("""
     - 📍 Location-based forecasts
     - 🌡️ Temperature & precipitation
@@ -333,7 +299,7 @@ with st.sidebar:
     """)
     
     st.markdown("""
-    <div class="sidebar-box" style="border-left-color:#00d4ff;">
+    <div class="sidebar-box" style="border-left-color:#00d4ff !important;">
         <p>💡 <strong>Try asking:</strong><br>
         <span style="color:#b0c4de;">"What's the weather in Karachi?"</span><br>
         <span style="color:#b0c4de;">"Will it rain in Lahore tomorrow?"</span></p>
@@ -342,7 +308,7 @@ with st.sidebar:
     
     st.divider()
     
-    st.markdown("### 👨‍💻 About Me")
+    st.markdown("## 👨‍💻 About Me")
     st.markdown("""
     <div class="about-me-sidebar">
         <p>Hi, I'm <span class="highlight">Daniyal Riaz</span>, an <span class="highlight-cyan">AI Offensive Security Enthusiast</span>, <span class="highlight-cyan">Ethical Hacker</span>, and <span class="highlight-cyan">Bug Bounty Hunter</span>.</p>
@@ -389,8 +355,8 @@ st.markdown("""
             <rect x="75" y="30" width="5" height="15" rx="2" fill="#1a3a5a" stroke="#4a9eff" stroke-width="1"/>
         </svg>
         <div>
-            <h1 style="font-size:2.5rem;background:linear-gradient(135deg,#4a9eff,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:0;font-weight:700;">Dani</h1>
-            <p style="color:#7a9ab5;font-size:1rem;margin:5px 0 0 0;">Your Intelligent Weather AI Agent</p>
+            <h1>Dani</h1>
+            <p>Your Intelligent Weather AI Agent</p>
         </div>
     </div>
 </div>
@@ -414,13 +380,11 @@ if not st.session_state.messages:
     """, unsafe_allow_html=True)
 
 # Display chat messages
-chat_container = st.container()
-with chat_container:
-    for msg in st.session_state.messages:
-        with st.chat_message(msg["role"]):
-            st.markdown(msg["content"])
+for msg in st.session_state.messages:
+    with st.chat_message(msg["role"]):
+        st.markdown(msg["content"])
 
-# Chat input - Fixed with white text
+# Chat input
 user_query = st.chat_input("Ask Dani about the weather...", key="chat_input")
 
 if user_query:
@@ -435,7 +399,6 @@ if user_query:
             result = run_workflow(user_query)
         st.markdown(result["answer"])
         
-        # Optional expander for workflow details
         with st.expander("🔍 View workflow details"):
             st.json({
                 "stage": result["stage"],
@@ -449,5 +412,4 @@ if user_query:
             {"role": "assistant", "content": result["answer"]}
         )
     
-    # Rerun to update the chat
     st.rerun()
