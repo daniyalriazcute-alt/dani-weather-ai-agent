@@ -58,7 +58,6 @@ st.markdown("""
     .left-sidebar li {
         color: #c8d6e5 !important;
         padding: 4px 0 !important;
-        list-style-type: none !important;
     }
     
     /* Sidebar boxes */
@@ -311,53 +310,63 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# SIDEBAR - Using HTML with proper structure
-st.markdown("""
-<div class="left-sidebar">
-    <h2>About Dani</h2>
-    <div class="sidebar-box">
-        <p>Dani converts natural-language weather requests into accurate forecasts using advanced AI and real-time weather data.</p>
-    </div>
-    
-    <h3>Key Features</h3>
-    <ul>
-        <li>Location-based forecasts</li>
-        <li>Temperature and precipitation</li>
-        <li>1-7 day predictions</li>
-        <li>Natural language understanding</li>
-        <li>Secure and reliable</li>
-    </ul>
-    
-    <div class="sidebar-box" style="border-left-color:#00d4ff;margin-top:12px;">
-        <p><strong>Try asking:</strong><br>
-        <span style="color:#b0c4de;">"What's the weather in Karachi?"</span><br>
-        <span style="color:#b0c4de;">"Will it rain in Lahore tomorrow?"</span></p>
-    </div>
-    
-    <hr class="divider">
-    
-    <h2>About Me</h2>
-    <div class="about-me-box">
-        <p>Hi, I'm <span class="highlight">Daniyal Riaz</span>, an <span class="highlight-cyan">AI Offensive Security Enthusiast</span>, <span class="highlight-cyan">Ethical Hacker</span>, and <span class="highlight-cyan">Bug Bounty Hunter</span>.</p>
-        <p>I'm passionate about finding vulnerabilities and helping organizations secure their digital assets.</p>
-        <p><span class="highlight">My Vision:</span> Creating AI applications with security at the forefront.</p>
-    </div>
-    
-    <div class="creator-badge">
-        <p class="name">Created with <span class="heart">❤️</span> by Daniyal Riaz</p>
-        <p class="title">AI Offensive Security Enthusiast • Ethical Hacker • Bug Bounty Hunter</p>
-    </div>
-    
-    <div class="copyright">
-        <p>© 2026 Dani Weather Agent</p>
-        <p>Built with security in mind</p>
-    </div>
-</div>
+# SIDEBAR - Using div with Streamlit markdown inside
+st.markdown('<div class="left-sidebar">', unsafe_allow_html=True)
 
-<div class="main-content">
+# Using Streamlit's native markdown for sidebar content
+st.markdown("## 🌤️ About Dani")
+st.markdown("""
+<div class="sidebar-box">
+    <p>Dani converts natural-language weather requests into accurate forecasts using advanced AI and real-time weather data.</p>
+</div>
 """, unsafe_allow_html=True)
 
+st.markdown("### ✨ Key Features")
+st.markdown("""
+- 📍 Location-based forecasts
+- 🌡️ Temperature & precipitation
+- 📅 1-7 day predictions
+- 🤖 Natural language understanding
+- 🔒 Secure & reliable
+""")
+
+st.markdown("""
+<div class="sidebar-box" style="border-left-color:#00d4ff;margin-top:12px;">
+    <p>💡 <strong>Try asking:</strong><br>
+    <span style="color:#b0c4de;">"What's the weather in Karachi?"</span><br>
+    <span style="color:#b0c4de;">"Will it rain in Lahore tomorrow?"</span></p>
+</div>
+""", unsafe_allow_html=True)
+
+st.divider()
+
+st.markdown("## 👨‍💻 About Me")
+st.markdown("""
+<div class="about-me-box">
+    <p>Hi, I'm <span class="highlight">Daniyal Riaz</span>, an <span class="highlight-cyan">AI Offensive Security Enthusiast</span>, <span class="highlight-cyan">Ethical Hacker</span>, and <span class="highlight-cyan">Bug Bounty Hunter</span>.</p>
+    <p>I'm passionate about finding vulnerabilities and helping organizations secure their digital assets.</p>
+    <p>🎯 <span class="highlight">My Vision:</span> Creating AI applications with security at the forefront.</p>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<div class="creator-badge">
+    <p class="name">👨‍💻 Created with <span class="heart">❤️</span> by Daniyal Riaz</p>
+    <p class="title">AI Offensive Security Enthusiast • Ethical Hacker • Bug Bounty Hunter</p>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<div class="copyright">
+    <p>© 2026 Dani Weather Agent</p>
+    <p>Built with security in mind 🔒</p>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown('</div>', unsafe_allow_html=True)
+
 # MAIN CHAT AREA
+st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
 # Logo and Header
 st.markdown("""
@@ -390,11 +399,11 @@ if "messages" not in st.session_state:
 if not st.session_state.messages:
     st.markdown("""
     <div class="welcome-box">
-        <h2>Hello! I'm Dani</h2>
+        <h2>👋 Hello! I'm Dani</h2>
         <p>Ask me about the weather anywhere in the world.</p>
         <div class="examples">
-            Try: "What's the weather in Karachi today?"<br>
-            Try: "Will it rain in Lahore tomorrow?"
+            💡 Try: "What's the weather in Karachi today?"<br>
+            💡 Try: "Will it rain in Lahore tomorrow?"
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -412,7 +421,7 @@ if user_query:
     st.session_state.messages.append({"role": "user", "content": user_query})
     
     # Get assistant response
-    with st.spinner("Dani is checking the forecast..."):
+    with st.spinner("🌤️ Dani is checking the forecast..."):
         result = run_workflow(user_query)
     
     # Add assistant message
