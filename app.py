@@ -21,43 +21,24 @@ st.markdown("""
         background: linear-gradient(135deg, #0a1922 0%, #1a2a3a 50%, #0d1b2a 100%);
     }
     
-    /* Left sidebar - Fixed position */
-    .left-sidebar {
-        background: rgba(10, 25, 40, 0.98);
-        border-right: 2px solid rgba(74, 158, 255, 0.2);
-        padding: 2rem 1.5rem;
-        height: 100vh;
-        overflow-y: auto;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 300px;
-        z-index: 100;
+    /* Sidebar styling - Override Streamlit's default sidebar */
+    section[data-testid="stSidebar"] {
+        background: rgba(10, 25, 40, 0.98) !important;
+        border-right: 2px solid rgba(74, 158, 255, 0.2) !important;
+        padding: 2rem 1.5rem !important;
+        width: 320px !important;
+        min-width: 320px !important;
     }
     
-    .left-sidebar h2 {
+    section[data-testid="stSidebar"] h1,
+    section[data-testid="stSidebar"] h2,
+    section[data-testid="stSidebar"] h3 {
         color: #4a9eff !important;
-        font-size: 1.3rem !important;
-        margin-top: 0 !important;
-        margin-bottom: 0.5rem !important;
     }
     
-    .left-sidebar h3 {
-        color: #4a9eff !important;
-        font-size: 1.1rem !important;
-        margin-top: 1.2rem !important;
-        margin-bottom: 0.5rem !important;
-    }
-    
-    .left-sidebar p {
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] li {
         color: #c8d6e5 !important;
-        font-size: 0.9rem !important;
-        line-height: 1.6 !important;
-    }
-    
-    .left-sidebar li {
-        color: #c8d6e5 !important;
-        padding: 4px 0 !important;
     }
     
     /* Sidebar boxes */
@@ -135,19 +116,6 @@ st.markdown("""
         color: #4a6a7a !important;
         font-size: 0.65rem !important;
         margin: 2px 0 !important;
-    }
-    
-    .divider {
-        border: none;
-        border-top: 1px solid rgba(26, 58, 90, 0.3);
-        margin: 1.5rem 0;
-    }
-    
-    /* Main content - shifted right */
-    .main-content {
-        margin-left: 300px;
-        padding: 1rem 2rem 6rem 2rem;
-        min-height: 100vh;
     }
     
     /* Chat messages */
@@ -310,63 +278,62 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# SIDEBAR - Using div with Streamlit markdown inside
-st.markdown('<div class="left-sidebar">', unsafe_allow_html=True)
+# ============================================================
+# SIDEBAR - Using Streamlit's native sidebar
+# ============================================================
+with st.sidebar:
+    st.markdown("## 🌤️ About Dani")
+    st.markdown("""
+    <div class="sidebar-box">
+        <p>Dani converts natural-language weather requests into accurate forecasts using advanced AI and real-time weather data.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("### ✨ Key Features")
+    st.markdown("""
+    - 📍 Location-based forecasts
+    - 🌡️ Temperature & precipitation
+    - 📅 1-7 day predictions
+    - 🤖 Natural language understanding
+    - 🔒 Secure & reliable
+    """)
+    
+    st.markdown("""
+    <div class="sidebar-box" style="border-left-color:#00d4ff;margin-top:12px;">
+        <p>💡 <strong>Try asking:</strong><br>
+        <span style="color:#b0c4de;">"What's the weather in Karachi?"</span><br>
+        <span style="color:#b0c4de;">"Will it rain in Lahore tomorrow?"</span></p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.divider()
+    
+    st.markdown("## 👨‍💻 About Me")
+    st.markdown("""
+    <div class="about-me-box">
+        <p>Hi, I'm <span class="highlight">Daniyal Riaz</span>, an <span class="highlight-cyan">AI Offensive Security Enthusiast</span>, <span class="highlight-cyan">Ethical Hacker</span>, and <span class="highlight-cyan">Bug Bounty Hunter</span>.</p>
+        <p>I'm passionate about finding vulnerabilities and helping organizations secure their digital assets.</p>
+        <p>🎯 <span class="highlight">My Vision:</span> Creating AI applications with security at the forefront.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class="creator-badge">
+        <p class="name">👨‍💻 Created with <span class="heart">❤️</span> by Daniyal Riaz</p>
+        <p class="title">AI Offensive Security Enthusiast • Ethical Hacker • Bug Bounty Hunter</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class="copyright">
+        <p>© 2026 Dani Weather Agent</p>
+        <p>Built with security in mind 🔒</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-# Using Streamlit's native markdown for sidebar content
-st.markdown("## 🌤️ About Dani")
-st.markdown("""
-<div class="sidebar-box">
-    <p>Dani converts natural-language weather requests into accurate forecasts using advanced AI and real-time weather data.</p>
-</div>
-""", unsafe_allow_html=True)
-
-st.markdown("### ✨ Key Features")
-st.markdown("""
-- 📍 Location-based forecasts
-- 🌡️ Temperature & precipitation
-- 📅 1-7 day predictions
-- 🤖 Natural language understanding
-- 🔒 Secure & reliable
-""")
-
-st.markdown("""
-<div class="sidebar-box" style="border-left-color:#00d4ff;margin-top:12px;">
-    <p>💡 <strong>Try asking:</strong><br>
-    <span style="color:#b0c4de;">"What's the weather in Karachi?"</span><br>
-    <span style="color:#b0c4de;">"Will it rain in Lahore tomorrow?"</span></p>
-</div>
-""", unsafe_allow_html=True)
-
-st.divider()
-
-st.markdown("## 👨‍💻 About Me")
-st.markdown("""
-<div class="about-me-box">
-    <p>Hi, I'm <span class="highlight">Daniyal Riaz</span>, an <span class="highlight-cyan">AI Offensive Security Enthusiast</span>, <span class="highlight-cyan">Ethical Hacker</span>, and <span class="highlight-cyan">Bug Bounty Hunter</span>.</p>
-    <p>I'm passionate about finding vulnerabilities and helping organizations secure their digital assets.</p>
-    <p>🎯 <span class="highlight">My Vision:</span> Creating AI applications with security at the forefront.</p>
-</div>
-""", unsafe_allow_html=True)
-
-st.markdown("""
-<div class="creator-badge">
-    <p class="name">👨‍💻 Created with <span class="heart">❤️</span> by Daniyal Riaz</p>
-    <p class="title">AI Offensive Security Enthusiast • Ethical Hacker • Bug Bounty Hunter</p>
-</div>
-""", unsafe_allow_html=True)
-
-st.markdown("""
-<div class="copyright">
-    <p>© 2026 Dani Weather Agent</p>
-    <p>Built with security in mind 🔒</p>
-</div>
-""", unsafe_allow_html=True)
-
-st.markdown('</div>', unsafe_allow_html=True)
-
+# ============================================================
 # MAIN CHAT AREA
-st.markdown('<div class="main-content">', unsafe_allow_html=True)
+# ============================================================
 
 # Logo and Header
 st.markdown("""
@@ -429,6 +396,3 @@ if user_query:
     
     # Rerun to update
     st.rerun()
-
-# Close the main content div
-st.markdown('</div>', unsafe_allow_html=True)
