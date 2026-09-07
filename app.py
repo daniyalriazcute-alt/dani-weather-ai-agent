@@ -19,35 +19,15 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-        /* ----------------------------------------------------
-           Hide Streamlit default UI
-        ---------------------------------------------------- */
-        #MainMenu {
-            visibility: hidden;
-        }
+        /* Hide Streamlit default UI */
+        #MainMenu { visibility: hidden; }
+        footer { visibility: hidden; }
+        header { visibility: hidden; }
+        [data-testid="stSidebar"] { display: none; }
 
-        footer {
-            visibility: hidden;
-        }
-
-        header {
-            visibility: hidden;
-        }
-
-        [data-testid="stSidebar"] {
-            display: none;
-        }
-
-        /* ----------------------------------------------------
-           App background and page layout
-        ---------------------------------------------------- */
+        /* App background */
         .stApp {
-            background: linear-gradient(
-                135deg,
-                #0a1922 0%,
-                #1a2a3a 50%,
-                #0d1b2a 100%
-            );
+            background: linear-gradient(135deg, #0a1922 0%, #1a2a3a 50%, #0d1b2a 100%);
         }
 
         [data-testid="stAppViewContainer"] {
@@ -65,9 +45,7 @@ st.markdown(
             padding-bottom: 8rem;
         }
 
-        /* ----------------------------------------------------
-           Headings and normal text
-        ---------------------------------------------------- */
+        /* Headings */
         h1, h2, h3 {
             color: #dcecff !important;
         }
@@ -76,9 +54,7 @@ st.markdown(
             color: #c8d6e5;
         }
 
-        /* ----------------------------------------------------
-           Dani logo header
-        ---------------------------------------------------- */
+        /* Logo container */
         .logo-container {
             display: flex;
             align-items: center;
@@ -116,18 +92,11 @@ st.markdown(
         }
 
         @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
-        /* ----------------------------------------------------
-           Information boxes
-        ---------------------------------------------------- */
+        /* Info boxes */
         .info-box {
             background: rgba(20, 50, 80, 0.35);
             padding: 15px 20px;
@@ -189,9 +158,7 @@ st.markdown(
             margin: 28px 0;
         }
 
-        /* ----------------------------------------------------
-           Feature columns
-        ---------------------------------------------------- */
+        /* Feature columns */
         [data-testid="stHorizontalBlock"] {
             gap: 1rem;
         }
@@ -203,9 +170,7 @@ st.markdown(
             padding: 12px 16px;
         }
 
-        /* ----------------------------------------------------
-           Welcome card
-        ---------------------------------------------------- */
+        /* Welcome card */
         .welcome-box {
             text-align: center;
             padding: 3rem 2rem;
@@ -236,9 +201,7 @@ st.markdown(
             line-height: 1.8;
         }
 
-        /* ----------------------------------------------------
-           Chat messages
-        ---------------------------------------------------- */
+        /* Chat messages */
         [data-testid="stChatMessage"] {
             padding: 0.6rem 0 !important;
             background: transparent !important;
@@ -248,16 +211,8 @@ st.markdown(
             color: #e8f0fe !important;
         }
 
-        [data-testid="stChatMessageContent"] p,
-        [data-testid="stChatMessageContent"] li,
-        [data-testid="stChatMessageContent"] span {
-            color: #e8f0fe !important;
-        }
-
         /* User message bubble */
-        [data-testid="stChatMessage"]:has(
-            [data-testid="stChatMessageAvatarUser"]
-        ) [data-testid="stChatMessageContent"] {
+        [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageContent"] {
             background: rgba(30, 70, 110, 0.72);
             border: 1px solid rgba(74, 158, 255, 0.28);
             border-radius: 18px 18px 4px 18px;
@@ -265,20 +220,14 @@ st.markdown(
         }
 
         /* Assistant message bubble */
-        [data-testid="stChatMessage"]:has(
-            [data-testid="stChatMessageAvatarAssistant"]
-        ) [data-testid="stChatMessageContent"] {
+        [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) [data-testid="stChatMessageContent"] {
             background: rgba(20, 50, 80, 0.48);
             border: 1px solid rgba(0, 212, 255, 0.20);
             border-radius: 18px 18px 18px 4px;
             padding: 12px 18px;
         }
 
-        /* ----------------------------------------------------
-           Chat input
-           Do NOT add position: fixed here.
-           Streamlit positions it automatically.
-        ---------------------------------------------------- */
+        /* Chat input */
         [data-testid="stChatInput"] {
             background: rgba(10, 25, 40, 0.96) !important;
             border: 2px solid rgba(74, 158, 255, 0.38) !important;
@@ -311,9 +260,7 @@ st.markdown(
             box-shadow: 0 4px 20px rgba(74, 158, 255, 0.45) !important;
         }
 
-        /* ----------------------------------------------------
-           Mobile improvements
-        ---------------------------------------------------- */
+        /* Mobile improvements */
         @media (max-width: 768px) {
             [data-testid="stMainBlockContainer"] {
                 padding: 1rem 1rem 7rem 1rem;
@@ -338,39 +285,24 @@ st.markdown(
 
 
 # ============================================================
-# HEADER
+# HEADER WITH FIXED SVG LOGO
 # ============================================================
 st.markdown(
     """
     <div class="logo-container">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="48" fill="#0a1922"
-                    stroke="#4a9eff" stroke-width="2"/>
-
-            <rect x="25" y="20" width="50" height="45" rx="8"
-                  fill="#1a3a5a" stroke="#4a9eff" stroke-width="1.5"/>
-
+            <circle cx="50" cy="50" r="48" fill="#0a1922" stroke="#4a9eff" stroke-width="2"/>
+            <rect x="25" y="20" width="50" height="45" rx="8" fill="#1a3a5a" stroke="#4a9eff" stroke-width="1.5"/>
             <circle cx="38" cy="38" r="5" fill="#00d4ff"/>
             <circle cx="62" cy="38" r="5" fill="#00d4ff"/>
-
             <circle cx="38" cy="38" r="2" fill="#ffffff"/>
             <circle cx="62" cy="38" r="2" fill="#ffffff"/>
-
-            <rect x="35" y="48" width="30" height="4" rx="2"
-                  fill="#4a9eff"/>
-
-            <line x1="50" y1="20" x2="50" y2="10"
-                  stroke="#4a9eff" stroke-width="2"/>
-
+            <rect x="35" y="48" width="30" height="4" rx="2" fill="#4a9eff"/>
+            <line x1="50" y1="20" x2="50" y2="10" stroke="#4a9eff" stroke-width="2"/>
             <circle cx="50" cy="8" r="3" fill="#ff6b6b"/>
-
-            <rect x="20" y="30" width="5" height="15" rx="2"
-                  fill="#1a3a5a" stroke="#4a9eff" stroke-width="1"/>
-
-            <rect x="75" y="30" width="5" height="15" rx="2"
-                  fill="#1a3a5a" stroke="#4a9eff" stroke-width="1"/>
+            <rect x="20" y="30" width="5" height="15" rx="2" fill="#1a3a5a" stroke="#4a9eff" stroke-width="1"/>
+            <rect x="75" y="30" width="5" height="15" rx="2" fill="#1a3a5a" stroke="#4a9eff" stroke-width="1"/>
         </svg>
-
         <div>
             <p class="title">Dani</p>
             <p class="subtitle">Your Intelligent Weather AI Agent</p>
@@ -566,9 +498,6 @@ if user_query:
             try:
                 result = run_workflow(user_query)
 
-                # Supports both:
-                # 1. {"answer": "Weather result"}
-                # 2. "Weather result"
                 if isinstance(result, dict):
                     answer = result.get(
                         "answer",
