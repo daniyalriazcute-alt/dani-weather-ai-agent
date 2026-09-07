@@ -1,47 +1,41 @@
 import streamlit as st
 from workflow import run_workflow
 
-# Page configuration
+# Page configuration - MUST be the first Streamlit command
 st.set_page_config(
     page_title="Dani — Weather AI Agent",
     page_icon="🤖",
     layout="wide",
+    initial_sidebar_state="expanded" # This ensures sidebar is open on desktop
 )
 
-# Custom CSS
+# --- Custom CSS (Minimal & Safe) ---
 st.markdown("""
 <style>
-    /* Hide default Streamlit elements */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-    
     /* Main background */
     .stApp {
         background: linear-gradient(135deg, #0a1922 0%, #1a2a3a 50%, #0d1b2a 100%);
     }
     
-    /* Sidebar styling - Override Streamlit's default sidebar */
+    /* Style the sidebar container */
     section[data-testid="stSidebar"] {
-        background: rgba(10, 25, 40, 0.98) !important;
+        background-color: rgba(10, 25, 40, 0.98) !important;
         border-right: 2px solid rgba(74, 158, 255, 0.2) !important;
         padding: 2rem 1.5rem !important;
-        width: 320px !important;
-        min-width: 320px !important;
     }
     
+    /* Sidebar text colors */
     section[data-testid="stSidebar"] h1,
     section[data-testid="stSidebar"] h2,
     section[data-testid="stSidebar"] h3 {
         color: #4a9eff !important;
     }
-    
     section[data-testid="stSidebar"] p,
     section[data-testid="stSidebar"] li {
         color: #c8d6e5 !important;
     }
-    
-    /* Sidebar boxes */
+
+    /* Custom boxes for sidebar */
     .sidebar-box {
         background: rgba(20, 50, 80, 0.3);
         padding: 12px 15px;
@@ -49,11 +43,9 @@ st.markdown("""
         margin: 8px 0;
         border-left: 3px solid #4a9eff;
     }
-    
     .sidebar-box p {
         color: #e8f0fe !important;
         margin: 0;
-        font-size: 0.9rem !important;
     }
     
     .about-me-box {
@@ -63,19 +55,14 @@ st.markdown("""
         border: 1px solid rgba(42, 90, 138, 0.3);
         margin: 8px 0;
     }
-    
     .about-me-box p {
         color: #c8d6e5 !important;
-        font-size: 0.85rem !important;
         line-height: 1.6 !important;
-        margin: 0 0 6px 0 !important;
     }
-    
     .highlight {
         color: #4a9eff !important;
         font-weight: 600;
     }
-    
     .highlight-cyan {
         color: #00d4ff !important;
         font-weight: 500;
@@ -89,18 +76,14 @@ st.markdown("""
         border: 1px solid rgba(42, 90, 138, 0.3);
         text-align: center;
     }
-    
     .creator-badge .name {
         color: #4a9eff !important;
         font-weight: 700;
-        font-size: 0.95rem !important;
     }
-    
     .creator-badge .title {
         color: #00d4ff !important;
-        font-size: 0.75rem !important;
+        font-size: 0.75rem;
     }
-    
     .creator-badge .heart {
         color: #ff6b6b !important;
     }
@@ -111,137 +94,68 @@ st.markdown("""
         padding-top: 10px;
         border-top: 1px solid rgba(26, 58, 90, 0.3);
     }
-    
     .copyright p {
         color: #4a6a7a !important;
         font-size: 0.65rem !important;
-        margin: 2px 0 !important;
     }
-    
-    /* Chat messages */
-    .stChatMessage {
-        padding: 0.5rem 0 !important;
-    }
-    
-    /* User messages */
-    .stChatMessage[data-testid="stChatMessage"]:nth-child(odd) .stMarkdown {
-        background: rgba(30, 60, 90, 0.6);
-        border-radius: 18px 18px 18px 4px;
+
+    /* Chat message styling */
+    .stChatMessage [data-testid="stMarkdownContainer"] {
+        background: rgba(30, 60, 90, 0.4);
+        border-radius: 18px;
         padding: 12px 18px;
-        max-width: 75%;
+        color: #e8f0fe;
+        border: 1px solid rgba(74, 158, 255, 0.15);
+    }
+    /* User messages - align right */
+    .stChatMessage [data-testid="stMarkdownContainer"] {
         margin-left: auto;
-        border: 1px solid rgba(74, 158, 255, 0.2);
-        color: #e8f0fe;
-    }
-    
-    /* Assistant messages */
-    .stChatMessage[data-testid="stChatMessage"]:nth-child(even) .stMarkdown {
-        background: rgba(20, 50, 80, 0.3);
-        border-radius: 18px 18px 4px 18px;
-        padding: 12px 18px;
+        margin-right: 0;
         max-width: 75%;
+    }
+    /* Assistant messages - align left */
+    .stChatMessage:nth-child(even) [data-testid="stMarkdownContainer"] {
+        margin-left: 0;
         margin-right: auto;
-        border: 1px solid rgba(0, 212, 255, 0.15);
-        color: #e8f0fe;
+        background: rgba(20, 50, 80, 0.3);
+        border-color: rgba(0, 212, 255, 0.15);
     }
     
-    /* Chat input */
-    .stChatInput {
-        position: fixed;
-        bottom: 2rem;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 50%;
-        max-width: 600px;
-        z-index: 999;
-        padding: 0.5rem 1rem;
-        background: rgba(10, 25, 40, 0.95);
-        border-radius: 30px;
-        border: 2px solid rgba(74, 158, 255, 0.3);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-    }
-    .stChatInput > div {
-        background: transparent !important;
-        border: none !important;
-        padding: 0 !important;
-    }
-    .stChatInput input {
-        color: #ffffff !important;
-        font-size: 1rem !important;
-        padding: 12px 16px !important;
-        background: transparent !important;
-        border: none !important;
-        outline: none !important;
-        caret-color: #4a9eff !important;
-    }
-    .stChatInput input::placeholder {
-        color: #aabbcc !important;
-        font-size: 0.95rem !important;
-        opacity: 1 !important;
-    }
-    .stChatInput input:focus {
-        color: #ffffff !important;
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-    }
-    .stChatInput button {
-        background: linear-gradient(135deg, #4a9eff, #00d4ff) !important;
-        border: none !important;
-        border-radius: 20px !important;
-        padding: 8px 20px !important;
-        color: white !important;
-        font-weight: 600 !important;
-        transition: all 0.3s ease !important;
-    }
-    .stChatInput button:hover {
-        transform: scale(1.05) !important;
-        box-shadow: 0 4px 20px rgba(74, 158, 255, 0.4) !important;
-    }
-    
-    /* Welcome message */
+    /* Welcome box */
     .welcome-box {
         text-align: center;
         padding: 3rem 2rem;
         background: rgba(20, 50, 80, 0.2);
         border-radius: 20px;
         border: 1px solid rgba(74, 158, 255, 0.1);
-        margin: 2rem auto;
         max-width: 600px;
+        margin: 2rem auto;
     }
     .welcome-box h2 {
         color: #4a9eff;
-        font-size: 1.8rem;
-        margin-bottom: 0.5rem;
     }
     .welcome-box p {
         color: #7a9ab5;
-        font-size: 1.1rem;
-        line-height: 1.6;
     }
     .welcome-box .examples {
         color: #b0c4de;
-        font-size: 0.95rem;
-        margin-top: 1rem;
     }
-    
+
     /* Logo container */
     .logo-container {
         display: flex;
         align-items: center;
         gap: 15px;
-        margin-bottom: 20px;
         padding: 15px 20px;
         background: rgba(10, 25, 40, 0.6);
         border-radius: 15px;
         border: 1px solid rgba(26, 58, 90, 0.3);
+        margin-bottom: 20px;
     }
     .logo-container svg {
         width: 55px;
         height: 55px;
         filter: drop-shadow(0 0 10px rgba(74, 158, 255, 0.3));
-        animation: pulse 3s ease-in-out infinite;
     }
     .logo-container .title {
         font-size: 2rem;
@@ -256,31 +170,10 @@ st.markdown("""
         font-size: 0.9rem;
         margin: 0;
     }
-    @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-    }
-    
-    /* Scrollbar */
-    ::-webkit-scrollbar {
-        width: 6px;
-    }
-    ::-webkit-scrollbar-track {
-        background: #0a1922;
-    }
-    ::-webkit-scrollbar-thumb {
-        background: #2a5a8a;
-        border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-        background: #3a7aba;
-    }
 </style>
 """, unsafe_allow_html=True)
 
-# ============================================================
-# SIDEBAR - Using Streamlit's native sidebar
-# ============================================================
+# --- SIDEBAR CONTENT ---
 with st.sidebar:
     st.markdown("## 🌤️ About Dani")
     st.markdown("""
@@ -331,9 +224,7 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
-# ============================================================
-# MAIN CHAT AREA
-# ============================================================
+# --- MAIN CHAT AREA ---
 
 # Logo and Header
 st.markdown("""
@@ -362,7 +253,7 @@ st.markdown("""
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Display welcome message if no messages
+# Display welcome message or chat history
 if not st.session_state.messages:
     st.markdown("""
     <div class="welcome-box">
@@ -374,25 +265,23 @@ if not st.session_state.messages:
         </div>
     </div>
     """, unsafe_allow_html=True)
-
-# Display chat messages
-for msg in st.session_state.messages:
-    with st.chat_message(msg["role"]):
-        st.markdown(msg["content"])
+else:
+    for msg in st.session_state.messages:
+        with st.chat_message(msg["role"]):
+            st.markdown(msg["content"])
 
 # Chat input
-user_query = st.chat_input("Ask Dani about the weather...", key="chat_input")
+user_query = st.chat_input("Ask Dani about the weather...")
 
 if user_query:
-    # Add user message
     st.session_state.messages.append({"role": "user", "content": user_query})
+    with st.chat_message("user"):
+        st.markdown(user_query)
+
+    with st.chat_message("assistant"):
+        with st.spinner("🌤️ Dani is checking the forecast..."):
+            result = run_workflow(user_query)
+        st.markdown(result["answer"])
+        st.session_state.messages.append({"role": "assistant", "content": result["answer"]})
     
-    # Get assistant response
-    with st.spinner("🌤️ Dani is checking the forecast..."):
-        result = run_workflow(user_query)
-    
-    # Add assistant message
-    st.session_state.messages.append({"role": "assistant", "content": result["answer"]})
-    
-    # Rerun to update
     st.rerun()
