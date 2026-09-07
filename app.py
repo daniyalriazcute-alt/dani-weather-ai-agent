@@ -36,6 +36,8 @@ st.markdown("""
         height: 100vh;
         overflow-y: auto;
         min-height: 100vh;
+        position: sticky;
+        top: 0;
     }
     .left-sidebar h2, .left-sidebar h3 {
         color: #4a9eff !important;
@@ -274,7 +276,7 @@ st.markdown("""
 # Create two columns: left sidebar (3) and main chat (9)
 col1, col2 = st.columns([3, 9])
 
-# LEFT COLUMN - Sidebar content
+# LEFT COLUMN - Sidebar content (STAYS VISIBLE)
 with col1:
     st.markdown("""
     <div class="left-sidebar">
@@ -374,34 +376,25 @@ with col2:
         """, unsafe_allow_html=True)
 
     # Display chat messages
-    for msg in st.session_state.messages:
-        with st.chat_message(msg["role"]):
-            st.markdown(msg["content"])
+    chat_container = st.container()
+    with chat_container:
+        for msg in st.session_state.messages:
+            with st.chat_message(msg["role"]):
+                st.markdown(msg["content"])
 
     # Chat input
     user_query = st.chat_input("Ask Dani about the weather...", key="chat_input")
 
     if user_query:
+        # Add user message
         st.session_state.messages.append({"role": "user", "content": user_query})
-        with st.chat_message("user"):
-            st.markdown(user_query)
-
-        with st.chat_message("assistant"):
-            with st.spinner("🌤️ Dani is checking the forecast..."):
-                result = run_workflow(user_query)
-            st.markdown(result["answer"])
-            
-            with st.expander("🔍 View workflow details"):
-                st.json({
-                    "stage": result["stage"],
-                    "intent": result.get("intent"),
-                    "retrieved_context": result.get("retrieved_context"),
-                    "weather_tool": result.get("weather_tool"),
-                    "security": result.get("security"),
-                })
-
-            st.session_state.messages.append(
-                {"role": "assistant", "content": result["answer"]}
-            )
         
+        # Get assistant response
+        with st.spinner("🌤️ Dani is checking the forecast..."):
+            result = run_workflow(user_query)
+        
+        # Add assistant message
+        st.session_state.messages.append({"role": "assistant", "content": result["answer"]})
+        
+        # Rerun to update the chat
         st.rerun()
