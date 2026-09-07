@@ -7,7 +7,7 @@ from workflow import run_workflow
 # ============================================================
 st.set_page_config(
     page_title="Dani — Weather AI Agent",
-    page_icon="⚡",
+    page_icon="🤖",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -103,6 +103,20 @@ st.markdown("""
         border-right: 1px solid rgba(74, 158, 255, 0.15) !important;
     }
 
+    /* Robot Logo Container */
+    .robot-icon-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    
+    .robot-icon {
+        width: 64px;
+        height: 64px;
+        filter: drop-shadow(0px 0px 12px rgba(0, 212, 255, 0.4));
+    }
+
     /* Sidebar Typography */
     .sidebar-logo {
         text-align: center;
@@ -111,12 +125,12 @@ st.markdown("""
         margin-bottom: 20px;
     }
     .sidebar-logo .logo-text {
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-weight: 800;
         background: linear-gradient(135deg, #4a9eff, #00d4ff);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin: 0;
+        margin: 4px 0 0 0;
     }
     .sidebar-logo .logo-sub {
         color: #7a9ab5;
@@ -186,10 +200,10 @@ st.markdown("""
         font-weight: 600;
         letter-spacing: 1px;
         text-transform: uppercase;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
     }
     .chat-header .chat-title {
-        font-size: 2rem;
+        font-size: 2.2rem;
         font-weight: 800;
         color: #ffffff;
         margin: 0;
@@ -232,12 +246,40 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# SVG Robot Icon Definition
+ROBOT_SVG = """
+<svg class="robot-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Antenna -->
+    <circle cx="32" cy="8" r="3" fill="#00D4FF"/>
+    <line x1="32" y1="11" x2="32" y2="18" stroke="#4A9EFF" stroke-width="2.5"/>
+    <!-- Ears -->
+    <rect x="10" y="27" width="4" height="10" rx="2" fill="#4A9EFF"/>
+    <rect x="50" y="27" width="4" height="10" rx="2" fill="#4A9EFF"/>
+    <!-- Head Body -->
+    <rect x="14" y="18" width="36" height="28" rx="8" fill="#12263E" stroke="#00D4FF" stroke-width="2"/>
+    <!-- Visor Panel -->
+    <rect x="18" y="23" width="28" height="14" rx="5" fill="#0A131E" stroke="#4A9EFF" stroke-width="1.5"/>
+    <!-- Glowing Eyes -->
+    <circle cx="26" cy="30" r="3" fill="#00D4FF"/>
+    <circle cx="38" cy="30" r="3" fill="#00D4FF"/>
+    <!-- Mouth Grid -->
+    <line x1="24" y1="40" x2="40" y2="40" stroke="#4A9EFF" stroke-width="2" stroke-linecap="round"/>
+    <!-- Neck -->
+    <rect x="27" y="46" width="10" height="4" fill="#4A9EFF"/>
+    <!-- Body Base Header -->
+    <path d="M20 50 C20 50, 24 58, 32 58 C40 58, 44 50, 44 50" stroke="#00D4FF" stroke-width="2" fill="none"/>
+</svg>
+"""
+
 # ============================================================
 # SIDEBAR CONTENT
 # ============================================================
 with st.sidebar:
-    st.markdown("""
+    st.markdown(f"""
     <div class="sidebar-logo">
+        <div class="robot-icon-container">
+            {ROBOT_SVG}
+        </div>
         <p class="logo-text">DANI AI</p>
         <p class="logo-sub">Weather Intelligence</p>
     </div>
@@ -270,8 +312,11 @@ with st.sidebar:
 # ============================================================
 # CHAT INTERFACE
 # ============================================================
-st.markdown("""
+st.markdown(f"""
 <div class="chat-header">
+    <div class="robot-icon-container">
+        {ROBOT_SVG}
+    </div>
     <div class="badge">● AI Agent Active</div>
     <div class="chat-title">Weather Intelligence Console</div>
     <div class="chat-subtitle">Ask anything about atmospheric conditions globally</div>
