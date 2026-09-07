@@ -7,7 +7,7 @@ from workflow import run_workflow
 st.set_page_config(
     page_title="Dani — Weather AI Agent",
     page_icon="🤖",
-    layout="wide",
+    layout="centered",
 )
 
 # ============================================================
@@ -28,25 +28,22 @@ st.markdown("""
     
     /* Main container */
     .main-container {
-        max-width: 900px;
+        max-width: 800px;
         margin: 0 auto;
-        padding: 1rem 2rem 8rem 2rem;
+        padding: 1rem 1.5rem 7rem 1.5rem;
     }
     
     /* Logo */
     .logo-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;
-        padding: 15px 20px;
-        background: rgba(10, 25, 40, 0.7);
+        text-align: center;
+        padding: 20px;
+        background: rgba(10, 25, 40, 0.6);
         border-radius: 15px;
         border: 1px solid rgba(74, 158, 255, 0.2);
         margin-bottom: 25px;
     }
     .logo-container .title {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
         font-weight: 700;
         background: linear-gradient(135deg, #4a9eff, #00d4ff);
         -webkit-background-clip: text;
@@ -55,86 +52,81 @@ st.markdown("""
     }
     .logo-container .subtitle {
         color: #7a9ab5;
-        font-size: 0.9rem;
-        margin: 0;
+        font-size: 1rem;
+        margin: 5px 0 0 0;
     }
     
     /* Section headers */
     .section-title {
         color: #4a9eff;
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         font-weight: 600;
         margin-top: 20px;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
     
     /* Info boxes */
     .info-box {
         background: rgba(20, 50, 80, 0.3);
-        padding: 15px 20px;
+        padding: 12px 18px;
         border-radius: 10px;
         border-left: 3px solid #4a9eff;
-        margin: 8px 0;
+        margin: 5px 0 10px 0;
     }
     .info-box p {
         color: #e8f0fe;
         margin: 0;
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
     
-    .highlight-box {
-        background: rgba(20, 50, 80, 0.25);
-        padding: 15px 20px;
+    .about-box {
+        background: rgba(20, 50, 80, 0.3);
+        padding: 12px 18px;
         border-radius: 10px;
         border: 1px solid rgba(74, 158, 255, 0.15);
-        margin: 8px 0;
+        margin: 5px 0 10px 0;
     }
-    .highlight-box p {
+    .about-box p {
         color: #c8d6e5;
         line-height: 1.8;
         margin: 6px 0;
+        font-size: 0.95rem;
     }
     
     .creator-box {
         background: rgba(20, 50, 80, 0.35);
         border-radius: 10px;
-        padding: 15px;
-        margin: 12px 0;
+        padding: 12px;
+        margin: 10px 0;
         border: 1px solid rgba(74, 158, 255, 0.15);
         text-align: center;
     }
     .creator-box .name {
         color: #4a9eff;
         font-weight: 700;
-        font-size: 1.1rem;
-        margin: 5px 0;
+        font-size: 1rem;
+        margin: 3px 0;
     }
     .creator-box .title {
         color: #00d4ff;
-        font-size: 0.85rem;
-        margin: 5px 0;
+        font-size: 0.8rem;
+        margin: 3px 0;
     }
     
     .divider {
         border: none;
-        border-top: 1px solid rgba(74, 158, 255, 0.15);
-        margin: 25px 0;
+        border-top: 1px solid rgba(74, 158, 255, 0.12);
+        margin: 20px 0;
     }
     
     .footer-text {
         text-align: center;
         color: #4a6a7a;
-        font-size: 0.75rem;
-        margin: 10px 0;
+        font-size: 0.7rem;
+        margin: 8px 0;
     }
     
-    /* Feature grid */
-    .feature-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px 20px;
-        padding: 5px 0;
-    }
+    /* Feature items */
     .feature-item {
         color: #c8d6e5;
         padding: 4px 0;
@@ -143,17 +135,17 @@ st.markdown("""
     
     /* Chat messages */
     .stChatMessage {
-        padding: 0.5rem 0 !important;
+        padding: 0.3rem 0 !important;
     }
     
     .stChatMessage [data-testid="stMarkdownContainer"] {
-        padding: 12px 18px;
+        padding: 10px 16px;
         border-radius: 18px;
         color: #e8f0fe;
-        max-width: 75%;
+        max-width: 80%;
     }
     
-    /* User messages - right aligned */
+    /* User messages */
     .stChatMessage:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stMarkdownContainer"] {
         background: rgba(30, 70, 110, 0.7);
         border: 1px solid rgba(74, 158, 255, 0.25);
@@ -162,7 +154,7 @@ st.markdown("""
         margin-right: 0;
     }
     
-    /* Assistant messages - left aligned */
+    /* Assistant messages */
     .stChatMessage:has([data-testid="stChatMessageAvatarAssistant"]) [data-testid="stMarkdownContainer"] {
         background: rgba(20, 50, 80, 0.45);
         border: 1px solid rgba(0, 212, 255, 0.15);
@@ -176,7 +168,6 @@ st.markdown("""
         background: rgba(10, 25, 40, 0.95) !important;
         border: 2px solid rgba(74, 158, 255, 0.35) !important;
         border-radius: 30px !important;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     }
     .stChatInput textarea {
         color: #ffffff !important;
@@ -195,38 +186,38 @@ st.markdown("""
     /* Welcome box */
     .welcome-box {
         text-align: center;
-        padding: 2.5rem 2rem;
+        padding: 2rem 1.5rem;
         background: rgba(20, 50, 80, 0.25);
         border-radius: 20px;
         border: 1px solid rgba(74, 158, 255, 0.12);
-        margin: 20px auto;
-        max-width: 550px;
+        margin: 15px auto;
+        max-width: 500px;
     }
     .welcome-box h2 {
         color: #4a9eff;
-        font-size: 1.6rem;
-        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
+        margin-bottom: 0.3rem;
     }
     .welcome-box p {
         color: #9ab5cc;
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
     .welcome-box .examples {
         color: #b0c4de;
-        font-size: 0.9rem;
-        margin-top: 10px;
+        font-size: 0.85rem;
+        margin-top: 8px;
         line-height: 1.8;
     }
 </style>
 """, unsafe_allow_html=True)
 
 # ============================================================
-# MAIN CONTENT
+# MAIN CONTAINER
 # ============================================================
 st.markdown('<div class="main-container">', unsafe_allow_html=True)
 
 # ============================================================
-# HEADER WITH LOGO
+# HEADER
 # ============================================================
 st.markdown("""
 <div class="logo-container">
@@ -249,10 +240,11 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ============================================================
-# KEY FEATURES
+# KEY FEATURES - PROPERLY FORMATTED
 # ============================================================
 st.markdown('<p class="section-title">✨ Key Features</p>', unsafe_allow_html=True)
 
+# Use Streamlit columns for proper layout
 col1, col2 = st.columns(2)
 
 with col1:
@@ -269,7 +261,7 @@ with col2:
 # TRY ASKING
 # ============================================================
 st.markdown("""
-<div class="info-box" style="border-left-color:#00d4ff; margin-top:15px;">
+<div class="info-box" style="border-left-color:#00d4ff; margin-top:12px;">
     <p>💡 <strong>Try asking:</strong><br>
     <span style="color:#b0c4de;">"What's the weather in Karachi today?"</span><br>
     <span style="color:#b0c4de;">"Will it rain in Lahore tomorrow?"</span></p>
@@ -279,13 +271,14 @@ st.markdown("""
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
 # ============================================================
-# ABOUT ME
+# ABOUT ME - COMPLETE
 # ============================================================
 st.markdown('<p class="section-title">👨‍💻 About Me</p>', unsafe_allow_html=True)
 
 st.markdown("""
-<div class="highlight-box">
-    <p>Hi, I'm <strong style="color:#4a9eff;">Daniyal Riaz</strong>, an <strong style="color:#00d4ff;">AI Offensive Security Enthusiast</strong>, <strong style="color:#00d4ff;">Ethical Hacker</strong>, and <strong style="color:#00d4ff;">Bug Bounty Hunter</strong>.</p>
+<div class="about-box">
+    <p>Hi, I'm <strong style="color:#4a9eff;">Daniyal Riaz</strong>.</p>
+    <p>I'm an <strong style="color:#00d4ff;">AI Offensive Security Enthusiast</strong>, <strong style="color:#00d4ff;">Ethical Hacker</strong>, and <strong style="color:#00d4ff;">Bug Bounty Hunter</strong>.</p>
     <p>I'm passionate about finding vulnerabilities and helping organizations secure their digital assets.</p>
     <p>🎯 <strong style="color:#4a9eff;">My Vision:</strong> Creating AI applications with security at the forefront.</p>
 </div>
@@ -339,11 +332,15 @@ if user_query:
     # Get assistant response
     with st.chat_message("assistant"):
         with st.spinner("🌤️ Dani is checking the forecast..."):
-            result = run_workflow(user_query)
-            if isinstance(result, dict):
-                answer = result.get("answer", "Sorry, I couldn't generate a response.")
-            else:
-                answer = str(result)
+            try:
+                result = run_workflow(user_query)
+                if isinstance(result, dict):
+                    answer = result.get("answer", "Sorry, I couldn't generate a response.")
+                else:
+                    answer = str(result)
+            except Exception as e:
+                answer = "⚠️ I couldn't retrieve the weather forecast. Please try again."
+                st.error(f"Error: {e}")
         st.markdown(answer)
         st.session_state.messages.append({"role": "assistant", "content": answer})
     
