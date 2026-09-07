@@ -91,20 +91,7 @@ st.markdown("""
         color: #e8f0fe;
     }
     
-    /* Avatar icons */
-    .stChatMessage[data-testid="stChatMessage"]:nth-child(odd)::before {
-        content: "👤";
-        font-size: 1.2rem;
-        margin-right: 8px;
-        float: right;
-    }
-    .stChatMessage[data-testid="stChatMessage"]:nth-child(even)::before {
-        content: "🤖";
-        font-size: 1.2rem;
-        margin-right: 8px;
-    }
-    
-    /* Chat input - FIXED VISIBILITY */
+    /* Chat input - FIXED with white text */
     .stChatInput {
         position: fixed;
         bottom: 2rem;
@@ -125,17 +112,28 @@ st.markdown("""
         border: none !important;
         padding: 0 !important;
     }
+    /* FIX: White text for input */
     .stChatInput input {
-        color: #e8f0fe !important;
+        color: #ffffff !important;
         font-size: 1rem !important;
         padding: 12px 16px !important;
         background: transparent !important;
         border: none !important;
         outline: none !important;
+        caret-color: #4a9eff !important;
     }
+    /* FIX: White placeholder */
     .stChatInput input::placeholder {
-        color: #8899aa !important;
+        color: #aabbcc !important;
         font-size: 0.95rem !important;
+        opacity: 1 !important;
+    }
+    /* FIX: Input text when typing */
+    .stChatInput input:focus {
+        color: #ffffff !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
     }
     .stChatInput button {
         background: linear-gradient(135deg, #4a9eff, #00d4ff) !important;
@@ -289,6 +287,19 @@ st.markdown("""
         font-size: 0.65rem !important;
         margin: 2px 0;
     }
+    
+    /* Logo container */
+    .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 10px;
+    }
+    .logo-container img {
+        width: 60px;
+        height: 60px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -343,11 +354,16 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
-# Main chat area
+# Main chat area with Logo
 st.markdown("""
 <div class="chat-header">
-    <h1>🌤️ Dani</h1>
-    <p>Your Intelligent Weather AI Agent</p>
+    <div class="logo-container">
+        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%234a9eff' opacity='0.2'/><circle cx='50' cy='50' r='30' fill='%234a9eff' opacity='0.4'/><circle cx='50' cy='50' r='15' fill='%234a9eff'/><text x='50' y='55' text-anchor='middle' font-size='24' fill='white' font-family='Arial'>🌤️</text></svg>" width="60" height="60">
+        <div>
+            <h1 style="font-size:2.5rem;background:linear-gradient(135deg,#4a9eff,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:0;font-weight:700;">Dani</h1>
+            <p style="color:#7a9ab5;font-size:1rem;margin:5px 0 0 0;">Your Intelligent Weather AI Agent</p>
+        </div>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -375,7 +391,7 @@ with chat_container:
         with st.chat_message(msg["role"]):
             st.markdown(msg["content"])
 
-# Chat input - Fixed visibility
+# Chat input - Fixed with white text
 user_query = st.chat_input("Ask Dani about the weather...", key="chat_input")
 
 if user_query:
