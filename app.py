@@ -309,77 +309,66 @@ st.markdown(
 
 st.caption("⚡ Multi-stage workflow • RAG • Weather tool • Groq • OWASP Top 10 for LLM Applications 2025")
 
-# Sidebar - Updated with Better Visibility
+# Sidebar - Using proper Streamlit markdown instead of raw HTML
 with st.sidebar:
+    st.markdown("## 🌤️ About Dani")
     st.markdown("""
-    <div style="padding:10px 0;">
-        <h3 style="color:#4a9eff;margin-bottom:15px;font-size:1.3rem;">🌤️ About Dani</h3>
-        <div class="info-box">
-            <p style="color:#e8f0fe !important;line-height:1.7;">
-                Dani is your intelligent weather assistant that converts natural-language weather 
-                requests into accurate forecasts. Using advanced AI and real-time weather data, 
-                Dani provides you with reliable weather information for any location worldwide.
-            </p>
-        </div>
-        
-        <h4 style="color:#4a9eff;margin-top:20px;margin-bottom:10px;">✨ Key Features</h4>
-        <ul style="color:#e8f0fe !important;list-style-type:none;padding-left:0;">
-            <li style="padding:5px 0;color:#e8f0fe !important;">📍 <strong style="color:#00d4ff;">Location-based forecasts</strong></li>
-            <li style="padding:5px 0;color:#e8f0fe !important;">🌡️ <strong style="color:#00d4ff;">Temperature & precipitation data</strong></li>
-            <li style="padding:5px 0;color:#e8f0fe !important;">📅 <strong style="color:#00d4ff;">1-7 day predictions</strong></li>
-            <li style="padding:5px 0;color:#e8f0fe !important;">🤖 <strong style="color:#00d4ff;">Natural language understanding</strong></li>
-            <li style="padding:5px 0;color:#e8f0fe !important;">🔒 <strong style="color:#00d4ff;">Secure & reliable</strong></li>
-        </ul>
-        
-        <div class="info-box" style="border-left-color:#00d4ff;">
-            <p style="color:#e8f0fe !important;font-size:0.9rem;margin:0;">
-                💡 <strong style="color:#4a9eff;">Try asking:</strong><br>
-                <span style="color:#b0c4de;">"What's the weather in Karachi today?"</span><br>
-                <span style="color:#b0c4de;">"Will it rain in Lahore tomorrow?"</span>
-            </p>
-        </div>
-        
-        <hr style="margin:20px 0;">
-        
-        <!-- About Me Section -->
-        <h3 style="color:#4a9eff;margin-bottom:10px;">👨‍💻 About Me</h3>
-        <div class="about-me-box">
-            <p>
-                Hi, I'm <span class="highlight">Daniyal Riaz</span>, 
-                an <span class="highlight-cyan">AI Offensive Security Enthusiast</span>, 
-                <span class="highlight-cyan">Ethical Hacker</span>, and 
-                <span class="highlight-cyan">Bug Bounty Hunter</span>.
-            </p>
-            <p>
-                I am passionate about finding vulnerabilities in digital assets and helping 
-                organizations secure their infrastructure. My mission is to make the digital 
-                world safer through responsible disclosure and proactive security measures.
-            </p>
-            <p>
-                🎯 <span class="vision">My Vision:</span><br>
-                Creating AI applications with security at the forefront. I believe that 
-                innovation and security should go hand in hand to build trustworthy and 
-                resilient digital solutions.
-            </p>
-        </div>
-        
-        <!-- Security Badge -->
-        <div class="security-badge">
-            <p>🔐 Security-First AI Development • Responsible Disclosure • Ethical Hacking</p>
-        </div>
-        
-        <!-- Creator Badge -->
-        <div class="creator-badge">
-            <p class="name">👨‍💻 Created with <span class="heart">❤️</span> by Daniyal Riaz</p>
-            <p class="title">AI Offensive Security Enthusiast • Ethical Hacker • Bug Bounty Hunter</p>
-            <p style="color:#7a9ab5 !important;font-size:0.75rem !important;margin-top:5px;">Building Secure AI Solutions</p>
-        </div>
-        
-        <!-- Copyright Footer -->
-        <div class="copyright">
-            <p>© 2026 Dani Weather Agent • All rights reserved</p>
-            <p class="tagline">Built with security in mind 🔒</p>
-        </div>
+    <div class="info-box">
+        <p>Dani is your intelligent weather assistant that converts natural-language weather requests into accurate forecasts. Using advanced AI and real-time weather data, Dani provides you with reliable weather information for any location worldwide.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("### ✨ Key Features")
+    st.markdown("""
+    - 📍 **Location-based forecasts**
+    - 🌡️ **Temperature & precipitation data**
+    - 📅 **1-7 day predictions**
+    - 🤖 **Natural language understanding**
+    - 🔒 **Secure & reliable**
+    """)
+    
+    st.markdown("""
+    <div class="info-box" style="border-left-color:#00d4ff;">
+        <p>💡 <strong>Try asking:</strong><br>
+        <span>"What's the weather in Karachi today?"</span><br>
+        <span>"Will it rain in Lahore tomorrow?"</span></p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.divider()
+    
+    # About Me Section
+    st.markdown("## 👨‍💻 About Me")
+    st.markdown("""
+    <div class="about-me-box">
+        <p>Hi, I'm <span class="highlight">Daniyal Riaz</span>, an <span class="highlight-cyan">AI Offensive Security Enthusiast</span>, <span class="highlight-cyan">Ethical Hacker</span>, and <span class="highlight-cyan">Bug Bounty Hunter</span>.</p>
+        <p>I am passionate about finding vulnerabilities in digital assets and helping organizations secure their infrastructure. My mission is to make the digital world safer through responsible disclosure and proactive security measures.</p>
+        <p>🎯 <span class="vision">My Vision:</span><br>
+        Creating AI applications with security at the forefront. I believe that innovation and security should go hand in hand to build trustworthy and resilient digital solutions.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Security Badge
+    st.markdown("""
+    <div class="security-badge">
+        <p>🔐 Security-First AI Development • Responsible Disclosure • Ethical Hacking</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Creator Badge
+    st.markdown("""
+    <div class="creator-badge">
+        <p class="name">👨‍💻 Created with <span class="heart">❤️</span> by Daniyal Riaz</p>
+        <p class="title">AI Offensive Security Enthusiast • Ethical Hacker • Bug Bounty Hunter</p>
+        <p style="color:#7a9ab5 !important;font-size:0.75rem !important;margin-top:5px;">Building Secure AI Solutions</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Copyright Footer
+    st.markdown("""
+    <div class="copyright">
+        <p>© 2026 Dani Weather Agent • All rights reserved</p>
+        <p class="tagline">Built with security in mind 🔒</p>
     </div>
     """, unsafe_allow_html=True)
 
