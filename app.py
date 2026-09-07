@@ -21,7 +21,14 @@ st.markdown("""
         background: linear-gradient(135deg, #0a1922 0%, #1a2a3a 50%, #0d1b2a 100%);
     }
     
-    /* Info box styling */
+    /* Main container */
+    .main-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 1rem 2rem 6rem 2rem;
+    }
+    
+    /* Info boxes */
     .info-box {
         background: rgba(20, 50, 80, 0.3);
         padding: 15px 20px;
@@ -32,6 +39,7 @@ st.markdown("""
     .info-box p {
         color: #e8f0fe !important;
         margin: 0;
+        font-size: 1rem !important;
     }
     
     .about-box {
@@ -43,8 +51,9 @@ st.markdown("""
     }
     .about-box p {
         color: #c8d6e5 !important;
-        line-height: 1.6 !important;
-        margin: 5px 0;
+        line-height: 1.8 !important;
+        margin: 8px 0;
+        font-size: 0.95rem !important;
     }
     
     .creator-box {
@@ -59,10 +68,12 @@ st.markdown("""
         color: #4a9eff !important;
         font-weight: 700;
         font-size: 1.1rem;
+        margin: 5px 0;
     }
     .creator-box .title {
         color: #00d4ff !important;
         font-size: 0.85rem;
+        margin: 5px 0;
     }
     .creator-box .heart {
         color: #ff6b6b !important;
@@ -71,7 +82,20 @@ st.markdown("""
     .divider {
         border: none;
         border-top: 1px solid rgba(26, 58, 90, 0.3);
-        margin: 20px 0;
+        margin: 25px 0;
+    }
+    
+    /* Feature columns */
+    .feature-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px 20px;
+        margin: 10px 0;
+    }
+    .feature-item {
+        color: #c8d6e5 !important;
+        padding: 4px 0;
+        font-size: 0.95rem;
     }
     
     /* Chat messages */
@@ -79,7 +103,6 @@ st.markdown("""
         padding: 0.5rem 0 !important;
     }
     
-    /* User messages */
     .stChatMessage[data-testid="stChatMessage"]:nth-child(odd) .stMarkdown {
         background: rgba(30, 60, 90, 0.6);
         border-radius: 18px 18px 18px 4px;
@@ -90,7 +113,6 @@ st.markdown("""
         color: #e8f0fe;
     }
     
-    /* Assistant messages */
     .stChatMessage[data-testid="stChatMessage"]:nth-child(even) .stMarkdown {
         background: rgba(20, 50, 80, 0.3);
         border-radius: 18px 18px 4px 18px;
@@ -107,8 +129,8 @@ st.markdown("""
         bottom: 2rem;
         left: 50%;
         transform: translateX(-50%);
-        width: 60%;
-        max-width: 700px;
+        width: 55%;
+        max-width: 650px;
         z-index: 999;
         padding: 0.5rem 1rem;
         background: rgba(10, 25, 40, 0.95);
@@ -192,10 +214,8 @@ st.markdown("""
         background: rgba(10, 25, 40, 0.6);
         border-radius: 15px;
         border: 1px solid rgba(26, 58, 90, 0.3);
-        margin-bottom: 20px;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0 auto 20px auto;
+        max-width: 500px;
     }
     .logo-container svg {
         width: 55px;
@@ -220,22 +240,15 @@ st.markdown("""
         0%, 100% { transform: scale(1); }
         50% { transform: scale(1.05); }
     }
-    
-    /* Main container */
-    .main-container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 0 2rem 6rem 2rem;
-    }
 </style>
 """, unsafe_allow_html=True)
 
 # ============================================================
-# MAIN CONTAINER - Everything in one column
+# MAIN CONTAINER
 # ============================================================
 st.markdown('<div class="main-container">', unsafe_allow_html=True)
 
-# Logo and Header (centered)
+# Logo and Header
 st.markdown("""
 <div class="logo-container">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
@@ -259,7 +272,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ============================================================
-# ABOUT DANI - Information Section (VISIBLE)
+# ABOUT DANI
 # ============================================================
 st.markdown("## 🌤️ About Dani")
 st.markdown("""
@@ -268,29 +281,31 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+# Key Features - Using columns for proper layout
 st.markdown("### ✨ Key Features")
-col_a, col_b = st.columns(2)
-with col_a:
-    st.write("📍 Location-based forecasts")
-    st.write("🌡️ Temperature & precipitation")
-    st.write("📅 1-7 day predictions")
-with col_b:
-    st.write("🤖 Natural language understanding")
-    st.write("🔒 Secure & reliable")
-    st.write("⚡ Real-time data")
+col1, col2 = st.columns(2)
+with col1:
+    st.markdown("📍 **Location-based forecasts**")
+    st.markdown("🌡️ **Temperature & precipitation**")
+    st.markdown("📅 **1-7 day predictions**")
+with col2:
+    st.markdown("🤖 **Natural language understanding**")
+    st.markdown("🔒 **Secure & reliable**")
+    st.markdown("⚡ **Real-time data**")
 
+# Try asking
 st.markdown("""
-<div class="info-box" style="border-left-color:#00d4ff;">
+<div class="info-box" style="border-left-color:#00d4ff;margin-top:15px;">
     <p>💡 <strong>Try asking:</strong><br>
-    "What's the weather in Karachi today?"<br>
-    "Will it rain in Lahore tomorrow?"</p>
+    <span style="color:#b0c4de;">"What's the weather in Karachi today?"</span><br>
+    <span style="color:#b0c4de;">"Will it rain in Lahore tomorrow?"</span></p>
 </div>
 """, unsafe_allow_html=True)
 
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
 # ============================================================
-# ABOUT ME - Your Profile (VISIBLE)
+# ABOUT ME
 # ============================================================
 st.markdown("## 👨‍💻 About Me")
 st.markdown("""
@@ -310,7 +325,7 @@ st.markdown("""
 
 st.markdown("""
 <div style="text-align:center;margin-top:15px;padding-top:10px;border-top:1px solid rgba(26,58,90,0.3);">
-    <p style="color:#4a6a7a;font-size:0.7rem;">© 2026 Dani Weather Agent • Built with security in mind 🔒</p>
+    <p style="color:#4a6a7a;font-size:0.7rem;margin:0;">© 2026 Dani Weather Agent • Built with security in mind 🔒</p>
 </div>
 """, unsafe_allow_html=True)
 
